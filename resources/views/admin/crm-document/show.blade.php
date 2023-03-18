@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('content')
 <div class="row">
-    <div class="card bg-blueGray-100">
+    <div class="card">
         <div class="card-header">
             <div class="card-header-container">
                 <h6 class="card-title">
@@ -62,7 +62,7 @@
             </div>
             <div class="form-group">
                 @can('crm_document_edit')
-                    <a href="{{ route('admin.crm-documents.edit', $crmDocument) }}" class="btn btn-indigo mr-2">
+                    <a href="{{ route('admin.crm-documents.edit', $crmDocument) }}" class="btn btn-primary mx-1">
                         {{ trans('global.edit') }}
                     </a>
                 @endcan

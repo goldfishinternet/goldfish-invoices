@@ -11,12 +11,3 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
-!/breeze.txt
-!/cashier.txt
-!/packages.txt
-!/permissions.txt
-!/sail-setup-notes.txt
-!/.env
-!/.env.sail
-!/_notes.txt
-!/_deployment.txt

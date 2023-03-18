@@ -14,19 +14,16 @@ return new class extends Migration
     public function up()
     {
         Schema::create('client_contacts', function (Blueprint $table) {
-            $table->id();
-            $table->integer('client_id')->nullable();
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('client_id');
+            $table->string('title',75)->nullable();
             $table->string('first_name',25)->nullable();
             $table->string('last_name',25)->nullable();
-            $table->string('title',75)->nullable();
             $table->string('email',127)->nullable();
             $table->string('phone',20)->nullable();
-            $table->string('password',100)->nullable();
-            $table->boolean('access_level')->nullable();
-            $table->integer('supervisor')->nullable();
-            $table->datetime('last_login')->nullable();
-            $table->string('password_reset',12)->nullable();
+            $table->string('mobile',20)->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::table('client_contacts', function (Blueprint $table) {

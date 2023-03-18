@@ -1,7 +1,5 @@
 <div>
-    <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
-        {{ __('global.profile_information') }}
-    </h6>
+    <p>{{ __('global.profile_information') }}</p>
 
     <div class="flex flex-wrap">
         <form wire:submit.prevent="updateProfileInformation" class="w-full">
@@ -22,7 +20,7 @@
             </div>
 
             <div class="form-group px-4 flex items-center">
-                <button class="btn btn-indigo mr-3">
+                <button class="btn btn-primary mr-3">
                     {{ __('global.save') }}
                 </button>
 

@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('content')
 
-<div class="card bg-white">
+<div class="card">
     <div class="card-header">
         <div class="card-header-container">
             <h6 class="card-title">
@@ -56,7 +56,7 @@
 
                 <div class="card-body mt-3">
                     <div class="form-group">
-                        <button type="submit" class="btn btn-indigo mr-2">
+                        <button type="submit" class="btn btn-primary mx-1">
                             import
                         </button>
                         <a href="{{ url()->previous() }}" class="btn btn-secondary">

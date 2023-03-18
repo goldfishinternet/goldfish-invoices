@@ -14,12 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('invoice_payments', function (Blueprint $table) {
-            $table->id();
-            $table->integer('invoice_id')->default(0);
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('invoice_id');
             $table->date('date_paid')->nullable();
             $table->decimal('amount_paid',7,2)->default(0.00);
             $table->string('payment_note')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::table('invoice_payments', function (Blueprint $table) {

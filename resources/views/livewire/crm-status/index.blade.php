@@ -9,7 +9,7 @@
             </select>
 
             @can('crm_status_delete')
-                <button class="btn btn-rose ml-3 disabled:opacity-50 disabled:cursor-not-allowed" type="button" wire:click="confirm('deleteSelected')" wire:loading.attr="disabled" {{ $this->selectedCount ? '' : 'disabled' }}>
+                <button class="btn btn-secondary ml-3 disabled:opacity-50 disabled:cursor-not-allowed" type="button" wire:click="confirm('deleteSelected')" wire:loading.attr="disabled" {{ $this->selectedCount ? '' : 'disabled' }}>
                     {{ __('Delete Selected') }}
                 </button>
             @endcan
@@ -65,19 +65,19 @@
                                 {{ $crmStatus->name }}
                             </td>
                             <td>
-                                <div class="flex justify-end">
+                                <div class="d-flex justify-content-end">
                                     @can('crm_status_show')
-                                        <a class="btn btn-sm btn-info mr-2" href="{{ route('admin.crm-statuses.show', $crmStatus) }}">
+                                        <a class="btn btn-sm btn-info mx-1" href="{{ route('admin.crm-statuses.show', $crmStatus) }}">
                                             {{ trans('global.view') }}
                                         </a>
                                     @endcan
                                     @can('crm_status_edit')
-                                        <a class="btn btn-sm btn-success mr-2" href="{{ route('admin.crm-statuses.edit', $crmStatus) }}">
+                                        <a class="btn btn-sm btn-primary mx-1" href="{{ route('admin.crm-statuses.edit', $crmStatus) }}">
                                             {{ trans('global.edit') }}
                                         </a>
                                     @endcan
                                     @can('crm_status_delete')
-                                        <button class="btn btn-sm btn-rose mr-2" type="button" wire:click="confirm('delete', {{ $crmStatus->id }})" wire:loading.attr="disabled">
+                                        <button class="btn btn-sm btn-danger mx-1" type="button" wire:click="confirm('delete', {{ $crmStatus->id }})" wire:loading.attr="disabled">
                                             {{ trans('global.delete') }}
                                         </button>
                                     @endcan

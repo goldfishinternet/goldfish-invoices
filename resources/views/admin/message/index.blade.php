@@ -7,8 +7,8 @@
         </div>
 
         <div class="w-1 flex-grow lg:pl-4">
-            <div class="card bg-white">
-                <div class="card-header border-b border-blueGray-200">
+            <div class="card">
+                <div class="card-header">
                     <div class="card-header-container">
                         <h6 class="card-title">
                             {{ $title }}
@@ -45,10 +45,10 @@
                                             </a>
                                         </td>
                                         <td class="px-4 py-2">
-                                            <div class="flex justify-end">
+                                            <div class="d-flex justify-content-end">
                                                 <form action="{{ route('admin.messages.destroy', $conversation) }}" method="POST">
                                                     @csrf
-                                                    <button class="btn btn-sm btn-rose mr-2" type="submit">
+                                                    <button class="btn btn-sm btn-secondary mx-1" type="submit">
                                                         {{ __('global.delete') }}
                                                     </button>
                                                 </form>

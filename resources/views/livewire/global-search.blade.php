@@ -9,9 +9,9 @@
         </span>
     @endif
 
-    <input type="text" placeholder="Search here..." wire:model.debounce.300ms="search" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:ring w-full pl-10" />
+    <input type="text" placeholder="Search here..." wire:model.debounce.300ms="search" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative rounded text-sm shadow outline-none focus:outline-none focus:ring w-full pl-10" />
 
-    <div class="absolute rounded w-full shadow-lg mt-12 z-20 bg-white right-0 max-h-96 overflow-y-auto overflow-x-hidden">
+    <div class="absolute rounded w-full shadow-lg mt-12 z-20 right-0 max-h-96 overflow-y-auto overflow-x-hidden">
         @foreach($results as $group => $entries)
             <div class="text-xs uppercase tracking-wider text-indigo-600 bg-indigo-100 font-bold py-2 px-3">
                 {{ $group }}

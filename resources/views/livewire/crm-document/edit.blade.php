@@ -32,7 +32,7 @@
     </div>
 
     <div class="form-group">
-        <button class="btn btn-indigo mr-2" type="submit">
+        <button class="btn btn-primary mx-1" type="submit">
             {{ trans('global.save') }}
         </button>
         <a href="{{ route('admin.crm-documents.index') }}" class="btn btn-secondary">

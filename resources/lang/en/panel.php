@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'site_title' => 'Livewire Tailwind',
+    'site_title' => 'Goldfish Invoices',
 ];

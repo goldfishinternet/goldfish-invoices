@@ -7,8 +7,8 @@
         </div>
 
         <div class="w-1 flex-grow lg:pl-4" x-data="{ replyHidden: true }">
-            <div class="card bg-white">
-                <div class="card-header border-b border-blueGray-200">
+            <div class="card">
+                <div class="card-header">
                     <div class="flex flex-col lg:flex-row lg:justify-between">
                         <h6 class="card-title">
                             {{ $conversation->subject }}
@@ -30,14 +30,14 @@
                             </div>
                         </h6>
 
-                        <button @click="replyHidden = false" class="btn btn-indigo w-full self-start lg:w-auto" type="button">
+                        <button @click="replyHidden = false" class="btn btn-primary w-full self-start lg:w-auto" type="button">
                             {{ __('global.reply') }}
                         </button>
                     </div>
 
                 </div>
 
-                <div class="card-body bg-blueGray-100 hidden" :class="{ 'hidden': replyHidden === true }">
+                <div class="card-body hidden" :class="{ 'hidden': replyHidden === true }">
                     <form action="{{ route('admin.messages.update', $conversation) }}" method="POST" class="pt-3">
                         @csrf
                         <div class="form-group {{ $errors->has('body') ? 'invalid' : '' }}">
@@ -47,7 +47,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <button class="btn btn-indigo w-full self-start lg:w-auto mr-2" type="submit">
+                            <button class="btn btn-primary w-full self-start lg:w-auto mx-1" type="submit">
                                 {{ __('global.send') }}
                             </button>
                             <button @click="replyHidden = true" type="button" class="btn btn-secondary">

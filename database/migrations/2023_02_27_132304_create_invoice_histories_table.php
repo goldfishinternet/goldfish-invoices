@@ -14,23 +14,21 @@ return new class extends Migration
     public function up()
     {
         Schema::create('invoice_histories', function (Blueprint $table) {
-            $table->id();
-            $table->integer('invoice_id')->nullable();
-            $table->integer('client_contacts_id')->nullable();
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('invoice_id');
+            $table->string('recipient')->nullable();
+            $table->text('message');
+            $table->boolean('send')->defaut(0)->nullable();
+            $table->boolean('attach')->defaut(0)->nullable();
             $table->datetime('date_sent')->nullable();
-            $table->integer('contact_type')->nullable();
-            $table->text('email_body');
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::table('invoice_histories', function (Blueprint $table) {
             $table->foreign('invoice_id', 'invoice_history_invoice_fk')
                 ->references('id')
                 ->on('invoices')
-                ->onDelete('cascade');
-            $table->foreign('client_contacts_id', 'invoice_history_client_contact_fk')
-                ->references('id')
-                ->on('client_contacts')
                 ->onDelete('cascade');
         });
     }

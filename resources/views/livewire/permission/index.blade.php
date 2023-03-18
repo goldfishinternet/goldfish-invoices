@@ -1,38 +1,36 @@
 <div>
-    <div class="card-controls sm:flex">
-        <div class="w-full sm:w-1/2">
-            Per page:
-            <select wire:model="perPage" class="form-select w-full sm:w-1/6">
+    <div class="card-controls d-flex flex-row p-3">
+        <div class="flex-fill px-3">
+            <label class="form-label">Search:</label>
+            <input type="text" wire:model.debounce.300ms="search" class="form-control" />
+        </div>
+        <div class="flex-fill px-3">
+            <label class="form-label">Per page:</label>
+            <select wire:model="perPage" class="form-control">
                 @foreach($paginationOptions as $value)
                     <option value="{{ $value }}">{{ $value }}</option>
                 @endforeach
             </select>
-
-            @can('permission_delete')
-                <button class="btn btn-rose ml-3 disabled:opacity-50 disabled:cursor-not-allowed" type="button" wire:click="confirm('deleteSelected')" wire:loading.attr="disabled" {{ $this->selectedCount ? '' : 'disabled' }}>
-                    {{ __('Delete Selected') }}
-                </button>
-            @endcan
-
-            @if(file_exists(app_path('Http/Livewire/ExcelExport.php')))
-                <livewire:excel-export model="Permission" format="csv" />
-                <livewire:excel-export model="Permission" format="xlsx" />
-                <livewire:excel-export model="Permission" format="pdf" />
-            @endif
-
-
-
-
         </div>
-        <div class="w-full sm:w-1/2 sm:text-right">
-            Search:
-            <input type="text" wire:model.debounce.300ms="search" class="w-full sm:w-1/3 inline-block" />
+        <div class="flex-fill px-3">
+            <label class="form-label">&nbsp;</label>
+            <div>
+                @can('user_delete')
+                    <button class="btn btn-danger" type="button" wire:click="confirm('deleteSelected')" wire:loading.attr="disabled" {{ $this->selectedCount ? '' : 'disabled' }}>
+                        {{ __('Delete Selected') }}
+                    </button>
+                @endcan
+                @if(file_exists(app_path('Http/Livewire/ExcelExport.php')))
+                    <livewire:excel-export model="Permission" format="csv" />
+                    <livewire:excel-export model="Permission" format="xlsx" />
+                    <livewire:excel-export model="Permission" format="pdf" />
+                @endif
+            </div>
         </div>
     </div>
     <div wire:loading.delay>
         Loading...
     </div>
-
     <div class="overflow-hidden">
         <div class="overflow-x-auto">
             <table class="table table-index w-full">
@@ -65,19 +63,19 @@
                                 {{ $permission->title }}
                             </td>
                             <td>
-                                <div class="flex justify-end">
+                                <div class="d-flex justify-content-end">
                                     @can('permission_show')
-                                        <a class="btn btn-sm btn-info mr-2" href="{{ route('admin.permissions.show', $permission) }}">
+                                        <a class="btn btn-sm btn-info mx-1" href="{{ route('admin.permissions.show', $permission) }}">
                                             {{ trans('global.view') }}
                                         </a>
                                     @endcan
                                     @can('permission_edit')
-                                        <a class="btn btn-sm btn-success mr-2" href="{{ route('admin.permissions.edit', $permission) }}">
+                                        <a class="btn btn-sm btn-primary mx-1" href="{{ route('admin.permissions.edit', $permission) }}">
                                             {{ trans('global.edit') }}
                                         </a>
                                     @endcan
                                     @can('permission_delete')
-                                        <button class="btn btn-sm btn-rose mr-2" type="button" wire:click="confirm('delete', {{ $permission->id }})" wire:loading.attr="disabled">
+                                        <button class="btn btn-sm btn-danger mx-1" type="button" wire:click="confirm('delete', {{ $permission->id }})" wire:loading.attr="disabled">
                                             {{ trans('global.delete') }}
                                         </button>
                                     @endcan
@@ -112,10 +110,10 @@
 @push('scripts')
     <script>
         Livewire.on('confirm', e => {
-    if (!confirm("{{ trans('global.areYouSure') }}")) {
-        return
-    }
-@this[e.callback](...e.argv)
-})
+            if (!confirm("{{ trans('global.areYouSure') }}")) {
+                return;
+            }
+            @this[e.callback](...e.argv);
+        })
     </script>
 @endpush

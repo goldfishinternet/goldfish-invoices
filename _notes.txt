@@ -1,81 +1,7 @@
 Notes
 **********************************
-See the MunaHR system design document for more details.
-
-Laravel prototype is based on a QuickAdminPanel core-ui gernerated code Laravel 9 which requires PHP 8+
-It has a standard breeze type architecture and I have been working on a docker/sail dev environment. Currently
-the prototype has simple user types with middleware to check access to routes. Not used gates and permissions at
-this point as focus is on features.
-
-The prototype should provide the key features and demonstrate feasibility with a focus on progress over
-complexity. This prototype should be a fully working example with a view to highlighting areas for improvement.
-Post prototype improvements might include:
-
-- Design
-    - UI such as Livewire/Vue
-    - Tanant personalised theme options
-- Features
-    - Asset Management
-    - Holidays
-    - Pay
-    - Integration
-      more here...
-- Pooled to Silo SaaS Design for...
-    - Security Segregation
-    - Performance, Horizonal Scaling, Load Balancing
-    - Simpler Backup and Recovery, Import/Export
-    - Isolation for Lower Risk
-    - Isolation for Tenant Specific Customisations
-- Authentication/Authorization
-    - Gates, Roles and Permissions for more advanced configuration by tenant
-
-The Landlord/Tenant SaaS uses a pooled architecure with a Trait used for most of the tenant segragation.
-This is a tenant_id/relation on the relevant DB tables and the Trait added to tenant specific Models.
-ManyToMany pivots currently have the tenant_id handled manually as I am not sure how else to handle that.
-
-Post prototype the system should be upgraded to a silo design with a tenant on-boarding process that creates the
-separate database and file system. A sub domain or CNAME alias would route the system to the correct db
-and file connection.
-
-TASKS:
-
-Document Requests
-A tenant creates a "Document Request" a type of document template that user(s) complete
-
-User Document
-An individuals "Document Request" which is fulfilled by one or more employees such as uploading
-an document, filling in text, signing or approving. These steps all combine into a final fulfilled
-document that is generated as a PDF.
-
-NB: Files are stored off the webroot and accessed via PHP handler to track and authenticate security.
-
-Recruitment
-A job opening along with assigned attachment types and answers to custom questions that
-need to be provided by the candidate.
-
-Recruitment Application
-A candidates application, the answers to custom questions and uploaded files.
-
-Recruitment Process/Stages
-Interview Schedules, Document Requests, Questions/Answers, History
-
-
-
-
-Prototype needs work to handle seeding new tenants with sample data. Review link below for an
-approach that involves creating a custom artisan command to run a subset of DB seeders.
-Will have general install seeders followed by a range of sample seeders that will setup a
-tenant with suitable starting point.
-
-Also review the saas boilerplate website for Silo/Pooled options. Possibly buy the package
-and design the Silo option to see what we can extract from best practice or past lessons or experience.
-
-https://github.com/romegasoftware/Multitenancy
-
-
-
-
-
+Laravel prototype is based on a QuickAdminPanel gernerated code Laravel 9 which requires PHP 8+
+It has a standard breeze type architecture and I have been working on a docker/sail dev environment.
 
 Uses Stripe/Cashier for subscriptions
 
@@ -104,7 +30,7 @@ php artisan storage:link
 
 sail artisan make:controller HomeController
 sail artisan make:model Category --seeder --factory --migration
-sail artisan artisan make:migration create_categories_table
+sail artisan make:migration create_categories_table
 sail artisan make:model Category
 sail artisan make:seeder CategorySeeder
 sail artisan make:factory CategoryFactory
@@ -112,6 +38,8 @@ sail artisan migrate
 sail artisan make:Controller
 sail artisan db:seed
 sail artisan db:seed --class=
+
+sail artisan make:livewire Invoice/Create
 
 
 or
@@ -132,3 +60,6 @@ sail artisan make:request UpdatePostRequest
 alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'
 php artisan optimize:clear
 sail artisan migrate:fresh --seed
+
+# Mailhog
+http://localhost:8025

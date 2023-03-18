@@ -7,8 +7,8 @@
         </div>
 
         <div class="w-1 flex-grow lg:pl-4">
-            <div class="card bg-blueGray-100">
-                <div class="card-header border-b border-blueGray-200">
+            <div class="card">
+                <div class="card-header">
                     <div class="flex flex-col lg:flex-row lg:justify-between">
                         <h6 class="card-title">
                             {{ __('global.new_message') }}
@@ -55,7 +55,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <button class="btn btn-indigo mr-2" type="submit">
+                            <button class="btn btn-primary mx-1" type="submit">
                                 {{ trans('global.send') }}
                             </button>
                             <a href="{{ route('admin.messages.index') }}" class="btn btn-secondary">
@@ -72,12 +72,12 @@
 @endsection
 
 @push('scripts')
-    <script>
+    <script type="module">
         $(function(){
-    $('#to').select2({
-        placeholder: '{{ __('global.pleaseSelect') }}',
-        allowClear: false
-    })
-});
+            $('#to').select2({
+                placeholder: '{{ __('global.pleaseSelect') }}',
+                allowClear: false
+            })
+        });
     </script>
 @endpush

@@ -39,7 +39,7 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Http\Middleware\AuthGates::class,
             \App\Http\Middleware\SetPreferredLocale::class,
-            \App\Http\Middleware\ShareUnreadConversations::class,
+            // \App\Http\Middleware\ShareUnreadConversations::class,
         ],
 
         'api' => [

@@ -1,23 +1,17 @@
 @extends('layouts.admin')
 @section('content')
-<div class="row">
-    <div class="card bg-white">
-        <div class="card-header border-b border-blueGray-200">
-            <div class="card-header-container">
-                <h6 class="card-title">
-                    {{ trans('cruds.team.title_singular') }}
-                    {{ trans('global.list') }}
-                </h6>
-
-                @can('team_create')
-                    <a class="btn btn-indigo" href="{{ route('admin.teams.create') }}">
-                        {{ trans('global.add') }} {{ trans('cruds.team.title_singular') }}
-                    </a>
-                @endcan
-            </div>
-        </div>
-        @livewire('team.index')
-
+<div class="card">
+    <div class="card-header">
+        <h4>
+            {{ trans('cruds.team.title_singular') }}
+            {{ trans('global.list') }}
+            @can('team_create')
+                <a class="btn btn-primary float-end" href="{{ route('admin.teams.create') }}">
+                    {{ trans('global.add') }} {{ trans('cruds.team.title_singular') }}
+                </a>
+            @endcan
+        </h4>
     </div>
+    @livewire('team.index')
 </div>
 @endsection
