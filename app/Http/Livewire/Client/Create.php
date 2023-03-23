@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Client;
 
 use App\Models\Client;
+use App\Models\Setting;
 use Livewire\Component;
 
 class Create extends Component

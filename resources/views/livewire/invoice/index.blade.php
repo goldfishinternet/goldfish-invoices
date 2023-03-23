@@ -92,19 +92,23 @@
                                 {{ $invoice->amount_paid }}
                             </td>
                             <td>
-                                <span class="badge {{ ($invoice->payment_status=='Paid')? 'bg-success': 'bg-danger'}}">{{ $invoice->payment_status }}</span>
+                                <span class="badge {{ (($invoice->payment_status=='Paid')? 'bg-success': (($invoice->payment_status=='Overdue')? 'bg-danger': 'bg-light')) }}">{{ $invoice->payment_status }}</span>
                             </td>
                             <td>
                                 <div class="d-flex justify-content-end">
                                     @can('invoice_show')
+                                        @if($invoice->total_with_tax > 0)
                                         <a class="btn btn-sm btn-info mx-1" href="{{ route('admin.invoices.show', $invoice) }}">
                                             {{ trans('global.view') }}
                                         </a>
+                                        @endif
                                     @endcan
                                     @can('invoice_show')
+                                        @if($invoice->total_with_tax > 0)
                                         <a class="btn btn-sm btn-info mx-1" href="{{ route('admin.pdf.invoice', $invoice) }}">
                                             {{ trans('global.pdf') }}
                                         </a>
+                                        @endif
                                     @endcan
                                     @can('invoice_edit')
                                         <a class="btn btn-sm btn-primary mx-1" href="{{ route('admin.invoices.edit', $invoice) }}">

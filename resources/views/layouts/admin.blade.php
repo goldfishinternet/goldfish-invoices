@@ -53,7 +53,7 @@
                             <h5 class="offcanvas-title" id="offcanvasNavbarLightLabel">Admin</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                         </div>
-                        <div class="offcanvas-body">
+                        <div class="offcanvas-body d-flex align-items-stretch flex-column justify-content-between">
                             <x-sidebar />
                         </div>
                     </div>

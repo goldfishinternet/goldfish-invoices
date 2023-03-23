@@ -128,7 +128,7 @@
             </tr>
             <tr>
                 <td colspan="4" class="text-end">{{ trans('cruds.invoice.labels.status') }}</td>
-                <td><span class="badge {{ ($invoice->payment_status=='Paid')? 'bg-success': 'bg-danger'}}">{{ $invoice->payment_status }}</span></td>
+                <td><span class="badge {{ (($invoice->payment_status=='Paid')? 'bg-success': (($invoice->payment_status=='Overdue')? 'bg-danger': 'bg-light')) }}">{{ $invoice->payment_status }}</span></td>
             </tr>
         </tfoot>
     </table>

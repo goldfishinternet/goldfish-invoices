@@ -92,7 +92,7 @@
                             </td>
                             <td>
                                 @foreach($user->roles as $key => $entry)
-                                    <span class="badge badge-relationship">{{ $entry->title }}</span>
+                                    <span class="badge bg-info">{{ $entry->title }}</span>
                                 @endforeach
                             </td>
                             <td>
@@ -100,7 +100,7 @@
                             </td>
                             <td>
                                 @if($user->team)
-                                    <span class="badge badge-relationship">{{ $user->team->name ?? '' }}</span>
+                                    <span class="badge bg-info">{{ $user->team->name ?? '' }}</span>
                                 @endif
                             </td>
                             <td>
