@@ -59,7 +59,7 @@ I have used Laravel Sail docker setup for development so the .env.example settin
 > _http(s)://localhost/login_
 
 ```
-email:andy@goldfishinternet.com
+email:admin@example.com
 password:password
 ```
 
