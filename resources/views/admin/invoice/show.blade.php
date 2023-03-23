@@ -136,14 +136,13 @@
 
         <div class="row mb-3">
             <div class="col-12">
-                @if($invoice->invoice_note != '')<p>{{ $invoice->invoice_note }}</p>@endif
+                @if($invoice->invoice_notes != '')<p>{{ $invoice->invoice_notes }}</p>@endif
 
-                <p><strong>{{ trans('cruds.invoice.labels.payment_terms') }}: {{ $invoice->payment_term }}</strong><br/>
+                <p><strong>{{ trans('cruds.invoice.labels.payment_terms') }}: {{ $invoice->days_payment_due }} days</strong><br/>
                 {{ trans('cruds.invoice.labels.payment_prompt') }} {{ date('d/m/Y', strtotime($invoice->date_issued . ' + ' . $invoice->days_payment_due . ' days')) }}</p>
 
-                <p>Bank of New Zealand<br/>
-                02-0372-0029074-000<br/>
-                Please use the invoice number as reference.</p>
+                @if($invoice->payment_instructions != '')<p>{{ $invoice->payment_instructions }}</p>@endif
+
             </div>
         </div>
 

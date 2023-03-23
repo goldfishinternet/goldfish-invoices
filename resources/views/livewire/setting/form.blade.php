@@ -128,16 +128,6 @@
         </div>
     </div>
     <div class="mb-3">
-        <label class="form-label" for="default_invoice_note">{{ trans('cruds.setting.fields.default_invoice_note') }}</label>
-        <input class="form-control {{ $errors->has('setting.default_invoice_note') ? 'is-invalid' : '' }}" type="text" name="default_invoice_note" id="default_invoice_note" wire:model.defer="setting.default_invoice_note">
-        <div class="invalid-feedback">
-            {{ $errors->first('setting.default_invoice_note') }}
-        </div>
-        <div class="help-block">
-            {{ trans('cruds.setting.fields.default_invoice_note_helper') }}
-        </div>
-    </div>
-    <div class="mb-3">
         <label class="form-label" for="currency_type">{{ trans('cruds.setting.fields.currency_type') }}</label>
         <input class="form-control {{ $errors->has('setting.currency_type') ? 'is-invalid' : '' }}" type="text" name="currency_type" id="currency_type" wire:model.defer="setting.currency_type">
         <div class="invalid-feedback">
@@ -217,6 +207,26 @@
         </div>
         <div class="help-block">
             {{ trans('cruds.setting.fields.default_days_payment_due_helper') }}
+        </div>
+    </div>
+    <div class="mb-3">
+        <label class="form-label" for="default_invoice_notes">{{ trans('cruds.setting.fields.default_invoice_notes') }}</label>
+        <textarea class="form-control {{ $errors->has('setting.default_invoice_notes') ? 'is-invalid' : '' }}" type="text" name="default_invoice_notes" id="default_invoice_notes" wire:model.defer="setting.default_invoice_notes"></textarea>
+        <div class="invalid-feedback">
+            {{ $errors->first('setting.default_invoice_notes') }}
+        </div>
+        <div class="help-block">
+            {{ trans('cruds.setting.fields.default_invoice_notes_helper') }}
+        </div>
+    </div>
+    <div class="mb-3">
+        <label class="form-label" for="default_payment_instructions">{{ trans('cruds.setting.fields.default_payment_instructions') }}</label>
+        <textarea class="form-control {{ $errors->has('setting.default_payment_instructions') ? 'is-invalid' : '' }}" type="text" name="default_payment_instructions" id="default_payment_instructions" wire:model.defer="setting.default_payment_instructions"></textarea>
+        <div class="invalid-feedback">
+            {{ $errors->first('setting.default_payment_instructions') }}
+        </div>
+        <div class="help-block">
+            {{ trans('cruds.setting.fields.default_payment_instructions_helper') }}
         </div>
     </div>
 

@@ -84,6 +84,8 @@
                     $filePath = \Illuminate\Support\Facades\Storage::disk('public')->path($setting->logo)
                 @endphp
                 <img src="{{ $filePath }}" height="60" alt="">
+            @else
+                <h1 style="color:#ffffff;">{{ $setting->name }}</h1>
             @endif
         </td>
     </tr>
@@ -196,15 +198,12 @@
         </tfoot>
     </table>
 
-    <p>{{ $invoice->invoice_note }}</p>
+    <p>{{ $invoice->invoice_notes }}</p>
 
-    <p><strong>{{ trans('cruds.invoice.labels.payment_terms') }}: {{ $invoice->payment_term }}</strong><br/>
+    <p><strong>{{ trans('cruds.invoice.labels.payment_terms') }}: {{ $invoice->days_payment_due }} days</strong><br/>
         {{ trans('cruds.invoice.labels.payment_prompt') }} {{ date('d/m/Y', strtotime($invoice->date_issued . ' + ' . $invoice->days_payment_due . ' days')) }}</p>
 
-    <p>Bank of New Zealand<br/>
-        02-0372-0029074-000<br/>
-        Please quote the invoice number.<br/>
-        Please make cheques payable to: "Goldfish Interactive Limited"</p>
+    <p>{{ $invoice->payment_instructions }}</p>
 
     <div id="footer">
         <p></p>

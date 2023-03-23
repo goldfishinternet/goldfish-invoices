@@ -19,6 +19,8 @@ class Create extends Component
         $client->default_tax_2_desc = $setting->default_tax_2_desc;
         $client->default_tax_2_rate = $setting->default_tax_2_rate;
         $client->default_days_payment_due = $setting->default_days_payment_due;
+        $client->default_payment_instructions = $setting->default_payment_instructions;
+        $client->default_invoice_notes = $setting->default_invoice_notes;
         $this->client = $client;
     }
 
@@ -106,6 +108,14 @@ class Create extends Component
             'client.default_days_payment_due' => [
                 'integer',
                 'required',
+            ],
+            'client.default_payment_instructions' => [
+                'string',
+                'nullable',
+            ],
+            'client.default_invoice_notes' => [
+                'string',
+                'nullable',
             ],
         ];
     }

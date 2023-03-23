@@ -30,7 +30,9 @@ class Edit extends Component
 
         $this->validate();
 
-        $this->setting->logo = $this->logo->store('logos');
+        if ($this->logo) {
+            $this->setting->logo = $this->logo->store('logos');
+        }
 
         $this->setting->save();
 
@@ -85,10 +87,6 @@ class Edit extends Component
                 'max:1024',
                 'nullable',
             ],
-            'setting.default_invoice_note' => [
-                'string',
-                'nullable',
-            ],
             'setting.currency_type' => [
                 'string',
                 'required',
@@ -120,6 +118,14 @@ class Edit extends Component
             'setting.default_days_payment_due' => [
                 'integer',
                 'required',
+            ],
+            'setting.default_invoice_notes' => [
+                'string',
+                'nullable',
+            ],
+            'setting.default_payment_instructions' => [
+                'string',
+                'nullable',
             ],
         ];
     }

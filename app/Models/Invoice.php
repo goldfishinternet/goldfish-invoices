@@ -36,13 +36,13 @@ class Invoice extends Model
         'invoice_number',
         'client_id',
         'date_issued',
-        'payment_term',
         'tax_1_desc',
         'tax_1_rate',
         'tax_2_desc',
         'tax_2_rate',
-        'invoice_note',
         'days_payment_due',
+        'payment_instructions',
+        'invoice_notes',
     ];
 
     protected $dates = [

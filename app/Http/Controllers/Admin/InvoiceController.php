@@ -27,13 +27,13 @@ class InvoiceController extends Controller
             'client_id' => null,
             'invoice_number' => $invoice_number,
             'date_issued' => date('Y-m-d'),
-            'payment_term' => '30 days',
             'tax_1_desc' => '',
             'tax_1_rate' => '0.00',
             'tax_2_desc' => '',
             'tax_2_rate' => '0.00',
-            'invoice_note' => '',
-            'days_payment_due' => '30'
+            'days_payment_due' => '30',
+            'invoice_notes' => '',
+            'payment_instructions' => '',
         ]);
 
         return view('admin.invoice.edit', compact('invoice'));

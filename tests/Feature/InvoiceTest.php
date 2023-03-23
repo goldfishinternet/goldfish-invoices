@@ -21,13 +21,13 @@ class InvoiceTest extends TestCase
             'client_id' => null,
             'invoice_number' => 1,
             'date_issued' => now(),
-            'payment_term' => '30 days',
             'tax_1_desc' => 'TAX1',
             'tax_1_rate' => 15.00,
             'tax_2_desc' => 'TAX2',
             'tax_2_rate' => 5.00,
-            'invoice_note' => 'Test invoice',
             'days_payment_due' => 30,
+            'invoice_notes' => 'Test invoice',
+            'payment_instructions' => 'Payment instructions',
         ]);
 
         // Create invoice
@@ -84,13 +84,13 @@ class InvoiceTest extends TestCase
             'client_id' => null,
             'invoice_number' => 2,
             'date_issued' => strtotime('31 days ago'),
-            'payment_term' => '30 days',
             'tax_1_desc' => 'TAX1',
             'tax_1_rate' => 15.00,
             'tax_2_desc' => 'TAX2',
             'tax_2_rate' => 5.00,
-            'invoice_note' => 'Test invoice',
             'days_payment_due' => 30,
+            'invoice_notes' => 'Test invoice',
+            'payment_instructions' => 'Payment instructions',
         ]);
 
         // Create invoice
@@ -147,13 +147,13 @@ class InvoiceTest extends TestCase
             'client_id' => null,
             'invoice_number' => 3,
             'date_issued' => now(),
-            'payment_term' => '30 days',
             'tax_1_desc' => 'TAX1',
             'tax_1_rate' => 15.00,
             'tax_2_desc' => '',
             'tax_2_rate' => 0.00,
-            'invoice_note' => 'Test invoice',
             'days_payment_due' => 30,
+            'invoice_notes' => 'Test invoice',
+            'payment_instructions' => 'Payment instructions',
         ]);
 
         // Create invoice
@@ -207,13 +207,13 @@ class InvoiceTest extends TestCase
             'client_id' => null,
             'invoice_number' => 4,
             'date_issued' => now(),
-            'payment_term' => '30 days',
             'tax_1_desc' => 'TAX1',
             'tax_1_rate' => 15.00,
             'tax_2_desc' => '',
             'tax_2_rate' => 0.00,
-            'invoice_note' => 'Test invoice',
             'days_payment_due' => 30,
+            'invoice_notes' => 'Test invoice',
+            'payment_instructions' => 'Payment instructions',
         ]);
 
         // Create invoice
@@ -269,13 +269,13 @@ class InvoiceTest extends TestCase
             'client_id' => null,
             'invoice_number' => 5,
             'date_issued' => now(),
-            'payment_term' => '30 days',
             'tax_1_desc' => 'TAX1',
             'tax_1_rate' => 15.00,
             'tax_2_desc' => '',
             'tax_2_rate' => 0.00,
-            'invoice_note' => 'Test invoice',
             'days_payment_due' => 30,
+            'invoice_notes' => 'Test invoice',
+            'payment_instructions' => 'Payment instructions',
         ]);
 
         // Create invoice
@@ -310,7 +310,6 @@ class InvoiceTest extends TestCase
             'date_paid' => now(),
             'amount_paid' => 115.00,
             'payment_note' => 'Payment in full',
-            'taxable' => true,
         ]);
 
         // Check Sub Total
@@ -346,13 +345,13 @@ class InvoiceTest extends TestCase
             'client_id' => null,
             'invoice_number' => 6,
             'date_issued' => strtotime('31 days ago'),
-            'payment_term' => '30 days',
             'tax_1_desc' => 'TAX1',
             'tax_1_rate' => 15.00,
             'tax_2_desc' => '',
             'tax_2_rate' => 0.00,
-            'invoice_note' => 'Test invoice',
             'days_payment_due' => 30,
+            'invoice_notes' => 'Test invoice',
+            'payment_instructions' => 'Payment instructions',
         ]);
 
         // Create invoice
@@ -387,7 +386,6 @@ class InvoiceTest extends TestCase
             'date_paid' => now(),
             'amount_paid' => 50.00,
             'payment_note' => '50 Payment',
-            'taxable' => true,
         ]);
 
         InvoicePayment::create([
@@ -396,7 +394,6 @@ class InvoiceTest extends TestCase
             'date_paid' => now(),
             'amount_paid' => 50.00,
             'payment_note' => '50 Payment',
-            'taxable' => true,
         ]);
 
         // Check Sub Total

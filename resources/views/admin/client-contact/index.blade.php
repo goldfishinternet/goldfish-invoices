@@ -5,12 +5,12 @@
         <h4>
             {{ trans('cruds.clientContact.title_singular') }}
             {{ trans('global.list') }}
+            @can('client_contact_create')
+                <a class="btn btn-primary float-end" href="{{ route('admin.client-contacts.create') }}">
+                    {{ trans('global.add') }} {{ trans('cruds.clientContact.title_singular') }}
+                </a>
+            @endcan
         </h4>
-        @can('client_contact_create')
-            <a class="btn btn-primary" href="{{ route('admin.client-contacts.create') }}">
-                {{ trans('global.add') }} {{ trans('cruds.clientContact.title_singular') }}
-            </a>
-        @endcan
     </div>
     @livewire('client-contact.index')
 </div>

@@ -47,12 +47,13 @@ class Setting extends Model
         'currency_type',
         'currency_symbol',
         'tax_code',
-        'default_invoice_note',
         'default_tax_1_desc',
         'default_tax_1_rate',
         'default_tax_2_desc',
         'default_tax_2_rate',
         'default_days_payment_due',
+        'default_payment_instructions',
+        'default_invoice_notes',
     ];
 
     protected $dates = [

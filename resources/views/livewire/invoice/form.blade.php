@@ -90,24 +90,24 @@
                         {{ trans('cruds.invoice.fields.days_payment_due_helper') }}
                     </div>
                 </div>
-                <div class="mb-3 {{ $errors->has('invoice.payment_term') ? 'invalid' : '' }}">
-                    <label class="form-label" for="payment_term">{{ trans('cruds.invoice.fields.payment_term') }}</label>
-                    <input class="form-control" type="text" name="payment_term" id="payment_term" wire:model.defer="invoice.payment_term">
+                <div class="mb-3 {{ $errors->has('invoice.payment_instructions') ? 'invalid' : '' }}">
+                    <label class="form-label" for="payment_instructions">{{ trans('cruds.invoice.fields.payment_instructions') }}</label>
+                    <textarea class="form-control" type="text" name="payment_instructions" id="payment_instructions" wire:model.defer="invoice.payment_instructions"></textarea>
                     <div class="invalid-feedback">
-                        {{ $errors->first('invoice.payment_term') }}
+                        {{ $errors->first('invoice.payment_instructions') }}
                     </div>
                     <div class="help-block">
-                        {{ trans('cruds.invoice.fields.payment_term_helper') }}
+                        {{ trans('cruds.invoice.fields.payment_instructions_helper') }}
                     </div>
                 </div>
-                <div class="mb-3 {{ $errors->has('invoice.invoice_note') ? 'invalid' : '' }}">
-                    <label class="form-label" for="invoice_note">{{ trans('cruds.invoice.fields.invoice_note') }}</label>
-                    <textarea class="form-control" type="text" name="invoice_note" id="invoice_note" wire:model.defer="invoice.invoice_note"></textarea>
+                <div class="mb-3 {{ $errors->has('invoice.invoice_notes') ? 'invalid' : '' }}">
+                    <label class="form-label" for="invoice_notes">{{ trans('cruds.invoice.fields.invoice_notes') }}</label>
+                    <textarea class="form-control" type="text" name="invoice_notes" id="invoice_notes" wire:model.defer="invoice.invoice_notes"></textarea>
                     <div class="invalid-feedback">
-                        {{ $errors->first('invoice.invoice_note') }}
+                        {{ $errors->first('invoice.invoice_notes') }}
                     </div>
                     <div class="help-block">
-                        {{ trans('cruds.invoice.fields.invoice_note_helper') }}
+                        {{ trans('cruds.invoice.fields.invoice_notes_helper') }}
                     </div>
                 </div>
                 <div class="form-group">

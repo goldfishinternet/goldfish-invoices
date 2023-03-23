@@ -48,8 +48,8 @@ class Edit extends Component
                 'nullable',
                 'date_format:Y-m-d',// . config('project.date_format'),
             ],
-            'invoice.payment_term' => [
-                'string',
+            'invoice.days_payment_due' => [
+                'integer',
                 'nullable',
             ],
             'invoice.tax_1_desc' => [
@@ -68,12 +68,12 @@ class Edit extends Component
                 'string',
                 'nullable',
             ],
-            'invoice.invoice_note' => [
+            'invoice.payment_instructions' => [
                 'string',
                 'nullable',
             ],
-            'invoice.days_payment_due' => [
-                'integer',
+            'invoice.invoice_notes' => [
+                'string',
                 'nullable',
             ],
         ];

@@ -116,6 +116,62 @@
                             {{ $client->client_notes }}
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.client.fields.default_tax_1_desc') }}
+                        </th>
+                        <td>
+                            {{ $client->default_tax_1_desc }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.client.fields.default_tax_1_rate') }}
+                        </th>
+                        <td>
+                            {{ $client->default_tax_1_rate }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.client.fields.default_tax_2_desc') }}
+                        </th>
+                        <td>
+                            {{ $client->default_tax_2_desc }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.client.fields.default_tax_2_rate') }}
+                        </th>
+                        <td>
+                            {{ $client->default_tax_2_rate }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.client.fields.default_days_payment_due') }}
+                        </th>
+                        <td>
+                            {{ $client->default_days_payment_due }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.client.fields.default_payment_instructions') }}
+                        </th>
+                        <td>
+                            {{ $client->default_payment_instructions }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.client.fields.default_invoice_notes') }}
+                        </th>
+                        <td>
+                            {{ $client->default_invoice_notes }}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         <div class="form-group">

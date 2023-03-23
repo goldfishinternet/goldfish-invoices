@@ -99,6 +99,14 @@ class Edit extends Component
                 'integer',
                 'required',
             ],
+            'client.default_payment_instructions' => [
+                'string',
+                'nullable',
+            ],
+            'client.default_invoice_notes' => [
+                'string',
+                'nullable',
+            ],
         ];
     }
 }

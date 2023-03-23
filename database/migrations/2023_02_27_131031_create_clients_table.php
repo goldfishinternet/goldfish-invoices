@@ -32,8 +32,8 @@ return new class extends Migration
             $table->string('default_tax_2_desc',50)->nullable();
             $table->decimal('default_tax_2_rate', 6,2)->default('0.00');
             $table->integer('default_days_payment_due')->default(30);
-            $table->mediumText('default_payment_instruction')->nullable();
-            $table->mediumText('default_invoice_note')->nullable();
+            $table->mediumText('default_payment_instructions')->nullable();
+            $table->mediumText('default_invoice_notes')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
