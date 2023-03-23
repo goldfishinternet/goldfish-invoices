@@ -1,7 +1,0 @@
-Service Providers
-
-One of the most important kernel bootstrapping actions is loading the service providers
-for your application. Service providers are responsible for bootstrapping all of the
-framework's various components, such as the database, queue, validation, and routing
-components. All of the service providers for the application are configured in the
-config/app.php configuration file's providers array.
