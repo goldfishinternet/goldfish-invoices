@@ -39,6 +39,22 @@ use \Illuminate\Database\Query\JoinClause;
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
 Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+// I use these for quick prototype development, be sure to remove or disable in production
+//Route::get('/dev', function() {
+
+    //$fullInvoices = (new \App\Service\InvoiceService())->fullInvoices('', '', 'all', 30, 0, 0);
+    //dd($fullInvoices);
+
+    //$fullInvoice = (new \App\Service\InvoiceService())->fullInvoiceById(1);
+    //dd($fullInvoice);
+
+    //$fullInvoice = (new \App\Service\InvoiceService())->fullInvoiceByNumber(10062);
+    //dd($fullInvoice);
+
+    //$invoice = \App\Models\Invoice::find(1);
+    //dd($invoice);
+
+//});
 
 // Auth::routes(['verify' => true]); (disabled so we can customise)
 
@@ -69,8 +85,8 @@ Route::get('email/approval', [ApprovalController::class, 'show'])->name('approva
 /* ***************************************************************
  * Authenticated users
  * ************************************************************* */
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'verified', 'approved']], function () {
-    Route::get('/', [\App\Http\Controllers\Admin\HomeController::class, 'index'])->name('home');
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'verified', 'approved', 'role:admin']], function () {
+    Route::get('/', [\App\Http\Controllers\Admin\HomeController::class, 'index'])->name('dashboard');
 
     // Invoices
     Route::resource('invoices', \App\Http\Controllers\Admin\InvoiceController::class, ['except' => ['store', 'update', 'destroy']]);
@@ -97,108 +113,14 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'v
     // Audit Logs
     Route::resource('audit-logs', \App\Http\Controllers\Admin\AuditLogController::class, ['except' => ['store', 'update', 'destroy', 'create', 'edit']]);
 
+    // Settings
+    //Route::resource('settings', \App\Http\Controllers\Admin\SettingController::class, ['except' => ['store', 'update', 'destroy']]);
+    Route::get('settings/edit/', [\App\Http\Controllers\Admin\SettingController::class, 'edit'])->name('settings.edit');
+    Route::post('settings/{setting}/update', [\App\Http\Controllers\Admin\SettingController::class, 'update'])->name('settings.update');
+
+
     // Team
     Route::resource('teams', \App\Http\Controllers\Admin\TeamController::class, ['except' => ['store', 'update', 'destroy']]);
-
-    // User Alert
-    Route::get('user-alerts/seen', [\App\Http\Controllers\Admin\UserAlertController::class, 'seen'])->name('user-alerts.seen');
-    Route::resource('user-alerts', \App\Http\Controllers\Admin\UserAlertController::class, ['except' => ['store', 'update', 'destroy']]);
-
-    // Messages
-    Route::get('messages', [\App\Http\Controllers\Admin\MessageController::class, 'index'])->name('messages.index');
-    Route::post('messages', [\App\Http\Controllers\Admin\MessageController::class, 'store'])->name('messages.store');
-    Route::get('messages/inbox', [\App\Http\Controllers\Admin\MessageController::class, 'inbox'])->name('messages.inbox');
-    Route::get('messages/outbox', [\App\Http\Controllers\Admin\MessageController::class, 'outbox'])->name('messages.outbox');
-    Route::get('messages/create', [\App\Http\Controllers\Admin\MessageController::class, 'create'])->name('messages.create');
-    Route::get('messages/{conversation}', [\App\Http\Controllers\Admin\MessageController::class, 'show'])->name('messages.show');
-    Route::post('messages/{conversation}', [\App\Http\Controllers\Admin\MessageController::class, 'update'])->name('messages.update');
-    Route::post('messages/{conversation}/destroy', [\App\Http\Controllers\Admin\MessageController::class, 'destroy'])->name('messages.destroy');
-
-    // Product Category
-    //Route::post('product-categories/media', [\App\Http\Controllers\Admin\ProductCategoryController::class, 'storeMedia'])->name('product-categories.storeMedia');
-    //Route::resource('product-categories', \App\Http\Controllers\Admin\ProductCategoryController::class, ['except' => ['store', 'update', 'destroy']]);
-
-    // Product Tag
-    //Route::resource('product-tags', \App\Http\Controllers\Admin\ProductTagController::class, ['except' => ['store', 'update', 'destroy']]);
-
-    // Product
-    //Route::post('products/media', [\App\Http\Controllers\Admin\ProductController::class, 'storeMedia'])->name('products.storeMedia');
-    //Route::resource('products', \App\Http\Controllers\Admin\ProductController::class, ['except' => ['store', 'update', 'destroy']]);
-
-    // Content Category
-    //Route::resource('content-categories', \App\Http\Controllers\Admin\ContentCategoryController::class, ['except' => ['store', 'update', 'destroy']]);
-
-    // Content Tag
-    //Route::resource('content-tags', \App\Http\Controllers\Admin\ContentTagController::class, ['except' => ['store', 'update', 'destroy']]);
-
-    // Content Page
-    //Route::post('content-pages/media', [\App\Http\Controllers\Admin\ContentPageController::class, 'storeMedia'])->name('content-pages.storeMedia');
-    //Route::resource('content-pages', \App\Http\Controllers\Admin\ContentPageController::class, ['except' => ['store', 'update', 'destroy']]);
-
-    // System Calendar
-    //Route::resource('system-calendars', \App\Http\Controllers\Admin\SystemCalendarController::class, ['except' => ['store', 'update', 'destroy', 'create', 'edit', 'show']]);
-
-    // Crm Status
-    //Route::resource('crm-statuses', \App\Http\Controllers\Admin\CrmStatusController::class, ['except' => ['store', 'update', 'destroy']]);
-
-    // Crm Customer
-    //Route::resource('crm-customers', \App\Http\Controllers\Admin\CrmCustomerController::class, ['except' => ['store', 'update', 'destroy']]);
-
-    // Crm Note
-    //Route::resource('crm-notes', \App\Http\Controllers\Admin\CrmNoteController::class, ['except' => ['store', 'update', 'destroy']]);
-
-    // Crm Document
-    //Route::post('crm-documents/media', [\App\Http\Controllers\Admin\CrmDocumentController::class, 'storeMedia'])->name('crm-documents.storeMedia');
-    //Route::resource('crm-documents', \App\Http\Controllers\Admin\CrmDocumentController::class, ['except' => ['store', 'update', 'destroy']]);
-
-    // Task Status
-    //Route::resource('task-statuses', \App\Http\Controllers\Admin\TaskStatusController::class, ['except' => ['store', 'update', 'destroy']]);
-
-    // Task Tag
-    //Route::resource('task-tags', \App\Http\Controllers\Admin\TaskTagController::class, ['except' => ['store', 'update', 'destroy']]);
-
-    // Task
-    //Route::post('tasks/media', [\App\Http\Controllers\Admin\TaskController::class, 'storeMedia'])->name('tasks.storeMedia');
-    //Route::resource('tasks', \App\Http\Controllers\Admin\TaskController::class, ['except' => ['store', 'update', 'destroy']]);
-
-    // Task Calendar
-    //Route::resource('task-calendars', \App\Http\Controllers\Admin\TaskCalendarController::class, ['except' => ['store', 'update', 'destroy', 'create', 'edit', 'show']]);
-
-    // Faq Category
-    //Route::resource('faq-categories', \App\Http\Controllers\Admin\FaqCategoryController::class, ['except' => ['store', 'update', 'destroy']]);
-
-    // Faq Question
-    //Route::resource('faq-questions', \App\Http\Controllers\Admin\FaqQuestionController::class, ['except' => ['store', 'update', 'destroy']]);
-
-    // Contact Company
-    //Route::resource('contact-companies', \App\Http\Controllers\Admin\ContactCompanyController::class, ['except' => ['store', 'update', 'destroy']]);
-
-    // Contact Contacts
-    //Route::resource('contact-contacts', \App\Http\Controllers\Admin\ContactContactController::class, ['except' => ['store', 'update', 'destroy']]);
-
-    // Courses
-    //Route::post('courses/media', [\App\Http\Controllers\Admin\CourseController::class, 'storeMedia'])->name('courses.storeMedia');
-    //Route::resource('courses', \App\Http\Controllers\Admin\CourseController::class, ['except' => ['store', 'update', 'destroy']]);
-
-    // Lessons
-    //Route::post('lessons/media', [\App\Http\Controllers\Admin\LessonController::class, 'storeMedia'])->name('lessons.storeMedia');
-    //Route::resource('lessons', \App\Http\Controllers\Admin\LessonController::class, ['except' => ['store', 'update', 'destroy']]);
-
-    // Tests
-    //Route::resource('tests', \App\Http\Controllers\Admin\TestController::class, ['except' => ['store', 'update', 'destroy']]);
-
-    // Questions
-    //Route::post('questions/media', [\App\Http\Controllers\Admin\QuestionController::class, 'storeMedia'])->name('questions.storeMedia');
-    //Route::resource('questions', \App\Http\Controllers\Admin\QuestionController::class, ['except' => ['store', 'update', 'destroy']]);
-
-    // Question Options
-    //Route::resource('question-options', \App\Http\Controllers\Admin\QuestionOptionController::class, ['except' => ['store', 'update', 'destroy']]);
-
-    // Test Results
-    //Route::resource('test-results', \App\Http\Controllers\Admin\TestResultController::class, ['except' => ['store', 'update', 'destroy']]);
-
-    // Test Answers
-    //Route::resource('test-answers', \App\Http\Controllers\Admin\TestAnswerController::class, ['except' => ['store', 'update', 'destroy']]);
 
 });
 
@@ -215,22 +137,5 @@ Route::group(['prefix' => 'team', 'as' => 'team.', 'middleware' => ['auth']], fu
     }
 });
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Route::get('/dev', function() {
-
-    //$fullInvoices = (new \App\Service\InvoiceService())->fullInvoices('', '', 'all', 30, 0, 0);
-    //dd($fullInvoices);
-
-    //$fullInvoice = (new \App\Service\InvoiceService())->fullInvoiceById(1);
-    //dd($fullInvoice);
-
-    //$fullInvoice = (new \App\Service\InvoiceService())->fullInvoiceByNumber(10062);
-    //dd($fullInvoice);
-
-    $invoice = \App\Models\Invoice::find(1);
-    dd($invoice);
-
-});
+// IMPORTANT: Remove default auth routes, we don't allow registrations
+// Auth::routes();

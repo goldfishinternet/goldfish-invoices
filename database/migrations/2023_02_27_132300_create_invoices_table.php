@@ -19,10 +19,10 @@ return new class extends Migration
             $table->string('invoice_number')->nullable();
             $table->date('date_issued')->nullable();
             $table->string('payment_term')->nullable();
-            $table->string('tax_1_desc')->nullable();
-            $table->decimal('tax_1_rate',6,3)->nullable();
-            $table->string('tax_2_desc')->nullable();
-            $table->decimal('tax_2_rate',6,3)->nullable();
+            $table->string('tax_1_desc',50)->nullable();
+            $table->decimal('tax_1_rate',6,2)->nullable();
+            $table->string('tax_2_desc',50)->nullable();
+            $table->decimal('tax_2_rate',6,2)->nullable();
             $table->text('invoice_note');
             $table->integer('days_payment_due',false, true)->nullable();
             $table->timestamps();

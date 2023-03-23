@@ -20,11 +20,6 @@
                         {{ __('Delete Selected') }}
                     </button>
                 @endcan
-                @if(file_exists(app_path('Http/Livewire/ExcelExport.php')))
-                    <livewire:excel-export model="Team" format="csv" />
-                    <livewire:excel-export model="Team" format="xlsx" />
-                    <livewire:excel-export model="Team" format="pdf" />
-                @endif
             </div>
         </div>
     </div>

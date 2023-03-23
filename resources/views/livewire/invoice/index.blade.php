@@ -20,11 +20,6 @@
                         {{ __('Delete Selected') }}
                     </button>
                 @endcan
-                @if(file_exists(app_path('Http/Livewire/ExcelExport.php')))
-                    <livewire:excel-export model="Invoice" format="csv" />
-                    <livewire:excel-export model="Invoice" format="xlsx" />
-                    <livewire:excel-export model="Invoice" format="pdf" />
-                @endif
             </div>
         </div>
     </div>
@@ -104,6 +99,11 @@
                                     @can('invoice_show')
                                         <a class="btn btn-sm btn-info mx-1" href="{{ route('admin.invoices.show', $invoice) }}">
                                             {{ trans('global.view') }}
+                                        </a>
+                                    @endcan
+                                    @can('invoice_show')
+                                        <a class="btn btn-sm btn-info mx-1" href="{{ route('admin.pdf.invoice', $invoice) }}">
+                                            {{ trans('global.pdf') }}
                                         </a>
                                     @endcan
                                     @can('invoice_edit')

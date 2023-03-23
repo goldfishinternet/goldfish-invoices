@@ -26,6 +26,8 @@ class Index extends Component
 
     public array $paginationOptions;
 
+    protected $paginationTheme = 'bootstrap';
+
     protected $queryString = [
         'search' => [
             'except' => '',

@@ -3,7 +3,7 @@
     <div class="form-group {{ $errors->has('permission.title') ? 'invalid' : '' }}">
         <label class="form-label required" for="title">{{ trans('cruds.permission.fields.title') }}</label>
         <input class="form-control" type="text" name="title" id="title" required wire:model.defer="permission.title">
-        <div class="validation-message">
+        <div class="invalid-feedback">
             {{ $errors->first('permission.title') }}
         </div>
         <div class="help-block">

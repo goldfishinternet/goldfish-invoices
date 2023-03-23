@@ -6,7 +6,7 @@
         <div class="card">
             <h4 class="card-header">Dashboard</h4>
             <div class="card-body">
-                <p>You are logged in!</p>
+                <p>You are logged in as administrator!</p>
             </div>
         </div>
     </div>

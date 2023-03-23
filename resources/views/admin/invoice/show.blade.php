@@ -11,193 +11,141 @@
     </div>
     <div class="card-body">
 
+        <div class="row mb-3">
+            <div class="col-12">
+                <div class="bg-dark p-3">
+                    @if($setting->logo!='')
+                        <img src="{{ asset('storage/'.$setting->logo) }}" height="80" alt="{{ $setting->name }}">
+                    @else
+                        <h1 class="text-white">{{ $setting->name }}</h1>
+                    @endif
+                </div>
+            </div>
+        </div>
 
+        <div class="row mb-3">
+            <div class="col-12 col-md-6">
+                <h3>{{ trans('cruds.invoice.title_singular') }}</h3>
+                <p>
+                    <strong>{{ trans('cruds.invoice.labels.invoice_no') }}:</strong> {{ $invoice->invoice_number }}<br/>
+                    <strong>{{ trans('cruds.invoice.labels.issue_date') }}:</strong> {{ date('d/m/Y', strtotime($invoice->date_issued)) }}
+                </p>
+            </div>
+            <div class="col-12 col-md-6">
+                <h3>{{ $setting->name }}</h3>
+                <p>
+                    @if($setting->address1 != '') {{ $setting->address1 }}, <br>@endif
+                    @if($setting->address2 != '') {{ $setting->address2 }}, <br>@endif
+                    @if($setting->city != '') {{ $setting->city }}, <br />@endif
+                    @if($setting->country != '') {{ $setting->country }}, <br>@endif
+                    @if($setting->postcode != '') {{ $setting->postcode }} @endif
+                </p>
+                <p>
+                    @if($setting->phone != '') Telephone: {{ $setting->phone }} <br>@endif
+                    @if($setting->mobile != '') Mobile: {{ $setting->mobile }} <br>@endif
+                    @if($setting->email != '') Email: {{ $setting->email }} <br>@endif
+                    @if($setting->website != '') Web: {{ $setting->website }} <br>@endif
+                </p>
+            </div>
+        </div>
 
-        <table class="table table-view">
-        <tbody class="bg-white">
-        <tr>
-            <th>
-                {{ trans('cruds.invoice.fields.id') }}
-            </th>
-            <td>
-                {{ $invoice->id }}
-            </td>
-        </tr>
-        <tr>
-            <th>
-                {{ trans('cruds.invoice.fields.invoice_number') }}
-            </th>
-            <td>
-                {{ $invoice->invoice_number }}
-            </td>
-        </tr>
-        <tr>
-            <th>
-                {{ trans('cruds.invoice.fields.date_issued') }}
-            </th>
-            <td>
-                {{ $invoice->date_issued }}
-            </td>
-        </tr>
-        <tr>
-            <th>
-                {{ trans('cruds.invoice.fields.client_name') }}
-            </th>
-            <td>
-                {{ ($invoice->client!=null)? $invoice->client->name: '' }}
-            </td>
-        </tr>
-        <tr>
-            <th>
-                {{ trans('cruds.invoice.fields.payment_term') }}
-            </th>
-            <td>
-                {{ $invoice->payment_term }}
-            </td>
-        </tr>
-        <tr>
-            <th>
-                {{ trans('cruds.invoice.fields.tax_desc') }}
-            </th>
-            <td>
-                {{ $invoice->tax_1_desc }}
-            </td>
-        </tr>
-        <tr>
-            <th>
-                {{ trans('cruds.invoice.fields.tax_rate') }}
-            </th>
-            <td>
-                {{ $invoice->tax_1_rate }}
-            </td>
-        </tr>
-        <tr>
-            <th>
-                {{ trans('cruds.invoice.fields.tax_desc') }}
-            </th>
-            <td>
-                {{ $invoice->tax_2_desc }}
-            </td>
-        </tr>
-        <tr>
-            <th>
-                {{ trans('cruds.invoice.fields.tax_rate') }}
-            </th>
-            <td>
-                {{ $invoice->tax_2_rate }}
-            </td>
-        </tr>
-        <tr>
-            <th>
-                {{ trans('cruds.invoice.fields.invoice_note') }}
-            </th>
-            <td>
-                {{ $invoice->invoice_note }}
-            </td>
-        </tr>
-        <tr>
-            <th>
-                {{ trans('cruds.invoice.fields.days_payment_due') }}
-            </th>
-            <td>
-                {{ $invoice->days_payment_due }}
-            </td>
-        </tr>
-        </tbody>
-        </table>
+        <div class="row mb-3">
+            <div class="col-12">
+                <h3>{{ trans('cruds.invoice.labels.invoice_to') }} {{ $invoice->client->name }}</h3>
+                <p>
+                    @if($invoice->client->address_1 != ''){{ $invoice->client->address_1 }},@endif
+                    @if($invoice->client->address_2 != ''){{ $invoice->client->address_2 }},@endif
+                    @if($invoice->client->address_1 != '' || $invoice->client->address_2 != '')<br>@endif
+                    @if($invoice->client->city != ''){{ $invoice->client->city }},@endif
+                    @if($invoice->client->province != ''){{ $invoice->client->province }},@endif
+                    @if($invoice->client->country != ''){{ $invoice->client->country }},@endif
+                    @if($invoice->client->postal_code != ''){{ $invoice->client->postcode }}@endif
+                </p>
+            </div>
+        </div>
 
+        <div class="row mb-3">
+            <div class="col-12">
+                <p>{{ trans('cruds.invoice.labels.products_services') }}</p>
+            </div>
+        </div>
 
-        <table class="table table-bordered table-striped table-hover datatable datatable-InvoiceItems">
+        <table class="table table-bordered">
         <thead>
         <tr>
-            <th>id</th>
-            <th>quantity</th>
-            <th>amount</th>
-            <th>taxable</th>
-            <th>work_description</th>
+            <th width="60%">{{ trans('cruds.invoice.labels.description') }}</th>
+            <th width="10%">{{ trans('cruds.invoice.labels.quantity') }}</th>
+            <th width="10%">{{ trans('cruds.invoice.labels.amount') }}</th>
+            <th width="10%">{{ trans('cruds.invoice.labels.taxable') }}</th>
+            <th width="10%">{{ trans('cruds.invoice.labels.sub_total') }}</th>
         </tr>
         </thead>
+        @foreach($invoice->invoiceItems as $key => $invoiceItem)
         <tbody>
-            @foreach($invoice->invoiceItems as $key => $invoiceItem)
-            <tr>
-                <td>
-                    {{ $invoiceItem->id }}
-                </td>
-                <td>
-                    {{ $invoiceItem->quantity }}
-                </td>
-                <td>
-                    {{ $invoiceItem->amount }}
-                </td>
-                <td>
-                    {{ $invoiceItem->taxable }}
-                </td>
-                <td>
-                    {{ $invoiceItem->work_description ?? '' }}
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-        </table>
-
-
-
-        <table class="table table-bordered table-striped table-hover datatable datatable-InvoicePayments">
-        <thead>
-        <tr>
-            <th>id</th>
-            <th>date_paid</th>
-            <th>amount_paid</th>
-            <th>payment_note</th>
+        <tr valign="top">
+            <td>{{ nl2br(str_replace(array('\n', '\r'), "\n", $invoiceItem->work_description)) }}</td>
+            <td>{{ $invoiceItem->quantity }}</td>
+            <td>{{ $setting->currency_symbol }}{{ $invoiceItem->amount }}</td>
+            <td>{{ ($invoiceItem->taxable)? 'Yes': 'No' }}</td>
+            <td>{{ $setting->currency_symbol }}{{ number_format($invoiceItem->quantity * $invoiceItem->amount, 2, '.', '') }}</td>
         </tr>
-        </thead>
-        <tbody>
-            @foreach($invoice->invoicePayments as $key => $invoicePayment)
-            <tr>
-                <td>
-                    {{ $invoicePayment->id }}
-                </td>
-                <td>
-                    {{ $invoicePayment->date_paid }}
-                </td>
-                <td>
-                    {{ $invoicePayment->amount_paid }}
-                </td>
-                <td>
-                    {{ $invoicePayment->payment_note ?? '' }}
-                </td>
-            </tr>
-            @endforeach
         </tbody>
-        </table>
-
-
-
-        <table class="table table-bordered table-striped table-hover datatable datatable-InvoicePayments">
-        <thead>
-        <tr>
-            <th>id</th>
-            <th>date_sent</th>
-            <th>email_body</th>
-        </tr>
-        </thead>
-        <tbody>
-            @foreach($invoice->invoiceHistories as $key => $invoiceHistory)
+        @endforeach
+        <tfoot>
             <tr>
-                <td>
-                    {{ $invoiceHistory->id }}
-                </td>
-                <td>
-                    {{ $invoiceHistory->date_sent }}
-                </td>
-                <td>
-                    {{ $invoiceHistory->email_body }}
-                </td>
+                <th colspan="4" class="text-end">{{ trans('cruds.invoice.labels.sub_total') }}</th>
+                <th>{{ $setting->currency_symbol }}{{ $invoice->total_no_tax }}</th>
             </tr>
-            @endforeach
-        </tbody>
-        </table>
+            @if((float)$invoice->total_tax_1 > 0)
+            <tr>
+                <td colspan="4" class="text-end">{{ ($invoice->tax_1_desc)? $invoice->tax_1_desc: trans('cruds.invoice.labels.tax_1_desc') }}</td>
+                <td>{{ $setting->currency_symbol }}{{ $invoice->total_tax_1 }}</td>
+            </tr>
+            @endif
+            @if((float)$invoice->total_tax_2 > 0)
+            <tr>
+                <td colspan="4" class="text-end">{{ ($invoice->tax_2_desc)? $invoice->tax_2_desc: trans('cruds.invoice.labels.tax_2_desc') }}</td>
+                <td>{{ $setting->currency_symbol }}{{ $invoice->total_tax_2 }}</td>
+            </tr>
+            @endif
+            <tr>
+                <th colspan="4" class="text-end">{{ trans('cruds.invoice.labels.total') }}</th>
+                <th>{{ $setting->currency_symbol }}{{ $invoice->total_with_tax }}</th>
+            </tr>
+            <tr>
+                <td colspan="4" class="text-end">&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            @if((float)$invoice->amount_paid > 0)
+            <tr>
+                <td colspan="4" class="text-end">{{ trans('cruds.invoice.labels.amount_paid') }}</td>
+                <td>{{ $setting->currency_symbol }}{{ $invoice->amount_paid }}</td>
+            </tr>
+            @endif
+            <tr>
+                <td colspan="4" class="text-end">{{ trans('cruds.invoice.labels.payment_by') }}</td>
+                <td>{{ date('d/m/Y', strtotime($invoice->date_issued . ' + ' . $invoice->days_payment_due . ' days')) }} @if($invoice->payment_status != 'Paid' && $invoice->days_overdue > 0) ({{ $invoice->days_overdue }} days overdue)@endif</td>
+            </tr>
+            <tr>
+                <td colspan="4" class="text-end">{{ trans('cruds.invoice.labels.status') }}</td>
+                <td><span class="badge {{ ($invoice->payment_status=='Paid')? 'bg-success': 'bg-danger'}}">{{ $invoice->payment_status }}</span></td>
+            </tr>
+        </tfoot>
+    </table>
 
+
+        <div class="row mb-3">
+            <div class="col-12">
+                @if($invoice->invoice_note != '')<p>{{ $invoice->invoice_note }}</p>@endif
+
+                <p><strong>{{ trans('cruds.invoice.labels.payment_terms') }}: {{ $invoice->payment_term }}</strong><br/>
+                {{ trans('cruds.invoice.labels.payment_prompt') }} {{ date('d/m/Y', strtotime($invoice->date_issued . ' + ' . $invoice->days_payment_due . ' days')) }}</p>
+
+                <p>Bank of New Zealand<br/>
+                02-0372-0029074-000<br/>
+                Please use the invoice number as reference.</p>
+            </div>
+        </div>
 
         <div class="form-group">
             @can('invoice_edit')

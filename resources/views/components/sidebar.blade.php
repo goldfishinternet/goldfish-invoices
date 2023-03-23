@@ -1,12 +1,8 @@
-<nav class="flex-shrink-0 p-3">
-    <a href="{{ route('admin.home') }}" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
-        <span class="fs-5 fw-semibold">{{ trans('panel.site_title') }}</a></span>
-    </a>
-    <ul class="list-unstyled ps-0">
+<nav class="p-3">
+    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
         @can('invoice_access')
-            <li class="border-top my-3"></li>
             <li class="mb-1">
-                @if(request()->is("admin/invoices*"))
+                @if(request()->is("admin/invoices*")||request()->is("admin/clients*")||request()->is("admin/client_contacts*"))
                     @php
                         $expanded = true;
                     @endphp
@@ -29,28 +25,6 @@
                                 </a>
                             </li>
                         @endcan
-                    </ul>
-                </div>
-            </li>
-        @endcan
-
-        @can('client_access')
-            <li class="border-top my-3"></li>
-            <li class="mb-1">
-                @if(request()->is("admin/clients*")||request()->is("admin/client_contacts*"))
-                    @php
-                        $expanded = true;
-                    @endphp
-                @else
-                    @php
-                        $expanded = false;
-                    @endphp
-                @endif
-                <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 {{ ($expanded)? "" : "collapsed" }}" data-bs-toggle="collapse" data-bs-target="#client-management-collapse" aria-expanded="{{ ($expanded)? "true" : "false" }}">
-                    {{ trans('cruds.clientManagement.title') }}
-                </button>
-                <div class="{{ ($expanded)? "expand" : "collapse" }}" id="client-management-collapse">
-                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                         @can('client_access')
                             <li>
                                 <a class="link-dark d-inline-flex text-decoration-none rounded{{ request()->is("admin/clients*") ? " active" : "" }}" href="{{ route("admin.clients.index") }}">
@@ -74,10 +48,9 @@
             </li>
         @endcan
 
-        @can('user_management_access')
-            <li class="border-top my-3"></li>
+        @can(['setting_access','user_management_access'])
             <li class="mb-1">
-                @if(request()->is("admin/roles*")||request()->is("admin/permissions*")||request()->is("admin/users*")||request()->is("admin/audit-logs*")||request()->is("admin/teams*"))
+                @if(request()->is("admin/settings*")||request()->is("admin/roles*")||request()->is("admin/permissions*")||request()->is("admin/users*")||request()->is("admin/audit-logs*")||request()->is("admin/teams*"))
                     @php
                         $expanded = true;
                     @endphp
@@ -86,11 +59,20 @@
                         $expanded = false;
                     @endphp
                 @endif
-                <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 {{ ($expanded)? "" : "collapsed" }}" data-bs-toggle="collapse" data-bs-target="#user-management-collapse" aria-expanded="{{ ($expanded)? "true" : "false" }}">
-                    {{ trans('cruds.userManagement.title') }}
+                <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 {{ ($expanded)? "" : "collapsed" }}" data-bs-toggle="collapse" data-bs-target="#setting-management-collapse" aria-expanded="{{ ($expanded)? "true" : "false" }}">
+                    {{ trans('cruds.settingManagement.title') }}
                 </button>
-                <div class="{{ ($expanded)? "expand" : "collapse" }}" id="user-management-collapse">
+                <div class="{{ ($expanded)? "expand" : "collapse" }}" id="setting-management-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                        @can('setting_access')
+                            <li>
+                                <a class="link-dark d-inline-flex text-decoration-none rounded{{ request()->is("admin/settings*") ? " active" : "" }}" href="{{ route("admin.settings.edit") }}">
+                                    <i class="fa-fw fas fa-briefcase mt-1 mr-1">
+                                    </i>
+                                    {{ trans('cruds.setting.title') }}
+                                </a>
+                            </li>
+                        @endcan
                         @can('role_access')
                             <li>
                                 <a class="link-dark d-inline-flex text-decoration-none rounded{{ request()->is("admin/roles*") ? " active" : "" }}" href="{{ route("admin.roles.index") }}">
@@ -140,81 +122,5 @@
                 </div>
             </li>
         @endcan
-
-        @can('user_alert_access')
-            <li class="border-top my-3"></li>
-            <li class="mb-1">
-                @if(request()->is("admin/user-alerts*"))
-                    @php
-                        $expanded = true;
-                    @endphp
-                @else
-                    @php
-                        $expanded = false;
-                    @endphp
-                @endif
-                <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0  {{ $expanded ? "" : "collapsed" }}" data-bs-toggle="collapse" data-bs-target="#user-alerts-collapse" aria-expanded="{{ $expanded ? "true" : "false" }}">
-                    {{ trans('cruds.userAlert.title') }}
-                </button>
-                <div class="{{ ($expanded)? "expand" : "collapse" }}" id="user-alerts-collapse">
-                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <li>
-                            <a class="link-dark d-inline-flex text-decoration-none rounded{{ request()->is("admin/user-alerts*") ? "active" : "" }}" href="{{ route("admin.user-alerts.index") }}">
-                                <i class="fa-fw fas fa-bell mt-1 mr-1">
-                                </i>
-                                {{ trans('cruds.userAlert.title') }}
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-        @endcan
-
-        <li class="border-top my-3"></li>
-        <li class="mb-1">
-            @if(request()->is("team")||request()->is("profile"))
-                @php
-                    $expanded = true;
-                @endphp
-            @else
-                @php
-                    $expanded = false;
-                @endphp
-            @endif
-            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 {{ $expanded ? "" : "collapsed" }}" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="{{ $expanded ? "true" : "false" }}">
-                Account
-            </button>
-            <div class="{{ ($expanded)? "expand" : "collapse" }}" id="account-collapse">
-                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    @if(file_exists(app_path('Http/Controllers/Auth/UserTeamController.php')))
-                        <li>
-                            <a href="{{ route("team.show") }}" class="{{ request()->is("team") ? " active" : "" }}">
-                                <i class="fa-fw fas fa-user-friends mt-1 mr-1"></i>
-                                {{ trans('global.my_team') }}
-                            </a>
-                        </li>
-                    @endif
-                    @if(file_exists(app_path('Http/Controllers/Auth/UserProfileController.php')))
-                        @can('auth_profile_edit')
-                            <li>
-                                <a class="link-dark d-inline-flex text-decoration-none rounded{{ request()->is("profile") ? " active" : "" }}" href="{{ route("profile.show") }}">
-                                    <i class="fa-fw fas fa-user-circle mt-1 mr-1"></i>
-                                    {{ trans('global.my_profile') }}
-                                </a>
-                            </li>
-                        @endcan
-                    @endif
-                    <li>
-                        <a class="link-dark d-inline-flex text-decoration-none rounded" href="#" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">
-                            <i class="fa-fw fas fa-sign-out-alt"></i>
-                            {{ trans('global.logout') }}
-                        </a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>
-                    </li>
-                </ul>
-            </div>
-        </li>
     </ul>
 </nav>

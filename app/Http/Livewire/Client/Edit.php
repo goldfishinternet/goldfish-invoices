@@ -67,6 +67,10 @@ class Edit extends Component
                 'string',
                 'nullable',
             ],
+            'client.tax_code' => [
+                'string',
+                'nullable',
+            ],
             'client.tax_status' => [
                 'string',
                 'nullable',
@@ -75,9 +79,25 @@ class Edit extends Component
                 'string',
                 'nullable',
             ],
-            'client.tax_code' => [
+            'client.default_tax_1_desc' => [
                 'string',
                 'nullable',
+            ],
+            'client.default_tax_1_rate' => [
+                'decimal:2',
+                'nullable',
+            ],
+            'client.default_tax_2_desc' => [
+                'string',
+                'nullable',
+            ],
+            'client.default_tax_2_rate' => [
+                'decimal:2',
+                'nullable',
+            ],
+            'client.default_days_payment_due' => [
+                'integer',
+                'required',
             ],
         ];
     }

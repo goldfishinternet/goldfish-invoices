@@ -10,37 +10,6 @@
             @livewire('global-search')
         </form>
 
-        <ul class="hidden items-center md:flex flex-wrap list-none">
-            <li class="inline-block relative">
-                <a class="text-white block py-1 px-3 cursor-pointer" onclick="openDropdown(event,'nav-notification-dropdown')">
-                    <i class="fas fa-bell"></i>
-                    @if($new_alert_count = auth()->user()->alerts()->wherePivot('seen_at', null)->count())
-                        <span class="absolute -top-1 text-xs font-semibold inline-flex rounded-full h-5 min-w-5 text-white bg-indigo-600 leading-5 justify-center">
-                            <span class="px-1">{{ $new_alert_count }}</span>
-                        </span>
-                    @endif
-                </a>
-                <div id="nav-notification-dropdown" data-popper-placement="bottom-start" class="bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48 hidden" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(617px, 58px);">
-                    @forelse(auth()->user()->alerts()->latest()->take(10)->get() as $alert)
-                        @if($alert->link)
-                            <a href="{{ $alert->link }}" target="_blank" class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent hover:bg-blueGray-100 cursor-pointer {{ $alert->pivot->seen_at ? 'text-blueGray-400' : 'text-blueGray-700' }}">
-                                <i class="fas fa-link fa-fw mr-1"></i>
-                                {{ $alert->message }}
-                            </a>
-                        @else
-                            <a class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent hover:bg-blueGray-100 cursor-pointer {{ $alert->pivot->seen_at ? 'text-blueGray-400' : 'text-blueGray-700' }}">
-                                <i class="fas fa-bell fa-fw mr-1"></i>
-                                {{ $alert->message }}
-                            </a>
-                        @endif
-                        @empty
-                        {{ __('global.no_alerts') }}
-                    @endforelse
-                </div>
-            </li>
-        </ul>
-
-
         @if(file_exists(app_path('Http/Livewire/LanguageSwitcher.php')))
             <ul class="flex-col md:flex-row list-none items-center hidden md:flex">
                 <livewire:language-switcher />

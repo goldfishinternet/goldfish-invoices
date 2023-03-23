@@ -3,7 +3,7 @@
     <div class="mb-3 {{ $errors->has('team.name') ? 'invalid' : '' }}">
         <label class="form-label required" for="name">{{ trans('cruds.team.fields.name') }}</label>
         <input class="form-control" type="text" name="name" id="name" required wire:model.defer="team.name">
-        <div class="validation-message">
+        <div class="invalid-feedback">
             {{ $errors->first('team.name') }}
         </div>
         <div class="help-block">
@@ -13,7 +13,7 @@
     <div class="mb-3 {{ $errors->has('team.owner_id') ? 'invalid' : '' }}">
         <label class="form-label required" for="owner">{{ trans('cruds.team.fields.owner') }}</label>
         <x-select-list class="form-control" required id="owner" name="owner" :options="$this->listsForFields['owner']" wire:model="team.owner_id" />
-        <div class="validation-message">
+        <div class="invalid-feedback">
             {{ $errors->first('team.owner_id') }}
         </div>
         <div class="help-block">

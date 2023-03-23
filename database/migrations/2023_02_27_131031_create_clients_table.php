@@ -24,9 +24,14 @@ return new class extends Migration
             $table->string('postcode',10)->nullable();
             $table->string('email',127)->nullable();
             $table->string('website',150)->nullable();
+            $table->string('tax_code',150)->nullable();
             $table->boolean('tax_status')->default(1)->nullable();
             $table->mediumText('client_notes')->nullable();
-            $table->string('tax_code',150)->nullable();
+            $table->string('default_tax_1_desc',50)->nullable();
+            $table->decimal('default_tax_1_rate', 6,2)->default('0.00');
+            $table->string('default_tax_2_desc',50)->nullable();
+            $table->decimal('default_tax_2_rate', 6,2)->default('0.00');
+            $table->integer('default_days_payment_due')->default(30);
             $table->timestamps();
             $table->softDeletes();
         });

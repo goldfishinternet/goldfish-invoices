@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Invoice;
+use App\Models\Setting;
 use Gate;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -49,6 +50,8 @@ class InvoiceController extends Controller
     {
         abort_if(Gate::denies('invoice_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('admin.invoice.show', compact('invoice'));
+        $setting = Setting::get()->last();
+
+        return view('admin.invoice.show', compact('invoice','setting'));
     }
 }

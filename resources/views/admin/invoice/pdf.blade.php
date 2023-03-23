@@ -71,14 +71,20 @@
         }
         table.stripe td {
             border-bottom: 1pt solid black;
+            padding:3px;
         }
     </style>
 </head>
 <body>
 <table cellspacing="0" cellpadding="0" border="0" width="100%">
     <tr>
-        <td style="background-color:#1A160F;padding:0 0 0 20px;">
-            {{ $setting->logo }}
+        <td style="background-color:#1A160F;padding:10px 10px 10px 10px;">
+            @if($setting->logo!='')
+                @php
+                    $filePath = \Illuminate\Support\Facades\Storage::disk('public')->path($setting->logo)
+                @endphp
+                <img src="{{ $filePath }}" height="60" alt="">
+            @endif
         </td>
     </tr>
 </table>
@@ -88,8 +94,8 @@
             <td valign="top" width="70%">
                 <h3>{{ trans('cruds.invoice.title_singular') }}</h3>
                 <p>
-                    <strong>Invoice#:</strong> {{ $invoice->invoice_number }}<br/>
-                    <strong>Issue Date:</strong> {{ date('d/m/Y', strtotime($invoice->date_issued)) }}
+                    <strong>{{ trans('cruds.invoice.labels.invoice_no') }}:</strong> {{ $invoice->invoice_number }}<br/>
+                    <strong>{{ trans('cruds.invoice.labels.issue_date') }}:</strong> {{ date('d/m/Y', strtotime($invoice->date_issued)) }}
                 </p>
             </td>
             <td valign="top" width="30%">
@@ -111,7 +117,7 @@
         <tr>
     </table>
 
-    <h3>Invoice to {{ $invoice->client->name }}</h3>
+    <h3>{{ trans('cruds.invoice.labels.invoice_to') }} {{ $invoice->client->name }}</h3>
 
     <p>
         @if($invoice->client->address_1 != ''){{ $invoice->client->address_1 }},@endif
@@ -123,16 +129,16 @@
         @if($invoice->client->postal_code != ''){{ $invoice->client->postcode }}@endif
     </p>
 
-    <p>To professional services rendered in connection with:</p>
+    <p>{{ trans('cruds.invoice.labels.products_services') }}</p>
 
     <table class="invoice_items stripe">
         <thead>
         <tr>
-            <th>Work Description</th>
-            <th>Quantity</th>
-            <th>Amount</th>
-            <th>Taxable?</th>
-            <th>Sub Total</th>
+            <th width="60%">{{ trans('cruds.invoice.labels.description') }}</th>
+            <th width="10%">{{ trans('cruds.invoice.labels.quantity') }}</th>
+            <th width="10%">{{ trans('cruds.invoice.labels.amount') }}</th>
+            <th width="10%">{{ trans('cruds.invoice.labels.taxable') }}</th>
+            <th width="10%">{{ trans('cruds.invoice.labels.sub_total') }}</th>
         </tr>
         </thead>
         @foreach($invoice->invoiceItems as $key => $invoiceItem)
@@ -140,7 +146,7 @@
         <tr valign="top">
             <td>{{ nl2br(str_replace(array('\n', '\r'), "\n", $invoiceItem->work_description)) }}</td>
             <td>{{ $invoiceItem->quantity }}</td>
-            <td>{{ $invoiceItem->amount }}</td>
+            <td>{{ $setting->currency_symbol }}{{ $invoiceItem->amount }}</td>
             <td>{{ ($invoiceItem->taxable)? 'Yes': 'No' }}</td>
             <td>{{ $setting->currency_symbol }}{{ number_format($invoiceItem->quantity * $invoiceItem->amount, 2, '.', '') }}</td>
         </tr>
@@ -148,33 +154,52 @@
         @endforeach
         <tfoot>
             <tr>
-                <td colspan="4">Sub Total</td><td>{{ $invoice->total_no_tax }}</td>
+                <td colspan="4" align="right"><strong>{{ trans('cruds.invoice.labels.sub_total') }}</strong></td>
+                <td>{{ $setting->currency_symbol }}{{ $invoice->total_no_tax }}</td>
+            </tr>
+            @if((float)$invoice->total_tax_1 > 0)
+            <tr>
+                <td colspan="4" align="right">{{ ($invoice->tax_1_desc)? $invoice->tax_1_desc: trans('cruds.invoice.labels.tax_1_desc') }}</td>
+                <td>{{ $setting->currency_symbol }}{{ $invoice->total_tax_1 }}</td>
+            </tr>
+            @endif
+            @if((float)$invoice->total_tax_2 > 0)
+            <tr>
+                <td colspan="4" align="right">{{ ($invoice->tax_2_desc)? $invoice->tax_2_desc: trans('cruds.invoice.labels.tax_2_desc') }}</td>
+                <td>{{ $setting->currency_symbol }}{{ $invoice->total_tax_2 }}</td>
+            </tr>
+            @endif
+            <tr>
+                <td colspan="4" align="right"><strong>{{ trans('cruds.invoice.labels.total') }}</strong></td>
+                <td>{{ $setting->currency_symbol }}{{ $invoice->total_with_tax }}</td>
+            </tr>
+            @if((float)$invoice->amount_paid > 0)
+            <tr>
+                <td colspan="4">&nbsp;</td>
+                <td>&nbsp;</td>
             </tr>
             <tr>
-                <td colspan="4">Tax</td><td>{{ $invoice->total_tax_1 }}</td>
+                <td colspan="4" align="right">{{ trans('cruds.invoice.labels.amount_paid') }}</td>
+                <td>{{ $setting->currency_symbol }}{{ $invoice->amount_paid }}</td>
+            </tr>
+            @endif
+            {{--
+            <tr>
+                <td colspan="4" align="right">{{ trans('cruds.invoice.labels.payment_by') }}</td>
+                <td>{{ date('d/m/Y', strtotime($invoice->date_issued . ' + ' . $invoice->days_payment_due . ' days')) }} @if($invoice->payment_status != 'Paid' && $invoice->days_overdue > 0) ({{ $invoice->days_overdue }} days overdue)@endif</td>
             </tr>
             <tr>
-                <td colspan="4">Other Tax</td><td>{{ $invoice->total_tax_2 }}</td>
+                <td colspan="4" align="right">{{ trans('cruds.invoice.labels.status') }}</td>
+                <td><span class="badge {{ ($invoice->payment_status=='Paid')? 'bg-success': 'bg-danger'}}">{{ $invoice->payment_status }}</span></td>
             </tr>
-            <tr>
-                <td colspan="4">Total</td><td>{{ $invoice->total_with_tax }}</td>
-            </tr>
-            <tr>
-                <td colspan="4">Amount Paid</td><td>{{ $invoice->amount_paid }}</td>
-            </tr>
-            <tr>
-                <td colspan="4">Payment By</td><td>{{ date('d/m/Y', strtotime($invoice->date_issued . ' + ' . $invoice->days_payment_due . ' days')) }} @if($invoice->payment_status != 'Paid' && $invoice->days_overdue > 0) ({{ $invoice->days_overdue }} days overdue)@endif</td>
-            </tr>
-            <tr>
-                <td colspan="4">Status</td><td><span class="badge {{ ($invoice->payment_status=='Paid')? 'bg-success': 'bg-danger'}}">{{ $invoice->payment_status }}</span></td>
-            </tr>
+            --}}
         </tfoot>
     </table>
 
     <p>{{ $invoice->invoice_note }}</p>
 
-    <p><strong>Payment Terms: {{ $invoice->payment_term }}</strong><br/>
-        Payment in full would be appreciated by {{ date('d/m/Y', strtotime($invoice->date_issued . ' + ' . $invoice->days_payment_due . ' days')) }}</p>
+    <p><strong>{{ trans('cruds.invoice.labels.payment_terms') }}: {{ $invoice->payment_term }}</strong><br/>
+        {{ trans('cruds.invoice.labels.payment_prompt') }} {{ date('d/m/Y', strtotime($invoice->date_issued . ' + ' . $invoice->days_payment_due . ' days')) }}</p>
 
     <p>Bank of New Zealand<br/>
         02-0372-0029074-000<br/>

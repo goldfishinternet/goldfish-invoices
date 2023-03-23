@@ -1,64 +1,105 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
-
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+<p align="left" style="background:#000000;">
+<a href="https://www.goldfishinternet.com"><img src="https://www.goldfishinternet.com/assets/images/logo/goldfish-interactive-color-logo.png" alt="Goldfish Internet"></a>
 </p>
 
-## About Laravel
+<h1>Goldfish Invoices</h1>
+## Topics
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+1. [Introduction](#introduction)
+2. [Documentation](#documentation)
+3. [Requirements](#requirements)
+4. [Installation & Configuration](#installation-and-configuration)
+5. [License](#license)
+6. [Security Vulnerabilities](#security-vulnerabilities)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Introduction
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+[Goldfish Invoices](https://www.goldfishinternet.com) is a lightweight invoice web application built with [Laravel](https://laravel.com) with the very excellent [Quick Admin Panel](https://quickadminpanel.com/)
+crud generator. It utilises [LiveWire](https://laravel-livewire.com/) full stack framework and [Bootstrap](https://getbootstrap.com/docs/5.0/getting-started/introduction/) CSS framework. 
 
-## Learning Laravel
+*Demo Laravel Invoice prototype targeted at individuals, freelancers and SMEs.*
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Primarily intended to satisfy my own needs as a freelance web developer, I am also using it to gain further real work experience building Laravel and LiveWire web application solutions
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+**This prototype is currently only partially complete but invoicing is functional enough for me to be using in production to create and generate PDF invoices**
 
-## Laravel Sponsors
+# Visit the [Demo](https://www.goldfishinternet.com)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Features currently include:
 
-### Premium Partners
+-   Authentication.
+-   Admin Dashboard.
+-   Client Records.
+-   Client Contact Records.
+-   Invoice and Invoice Items.
+-   PDF Invoice Generator.
+-   Invoice Payments.
+-   Invoice Notes
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+### Documentation
 
-## Contributing
+#### Come back soon
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Requirements
 
-## Code of Conduct
+-   **SERVER**: Apache 2 or NGINX.
+-   **RAM**: 2 GB or higher.
+-   **PHP**: 8 or higher.
+-   **For MySQL users**: 5.7.23 or higher.
+-   **For MariaDB users**: 10.2.7 or Higher.
+-   **Node**: 8.11.3 LTS or higher.
+-   **Composer**: 1.6.5 or higher.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Installation and Configuration
 
-## Security Vulnerabilities
+##### Execute these commands below, in order
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```
+composer create-project krayin/laravel-crm
+```
 
-## License
+-   Find **.env** file in root directory and change the **APP_URL** param to your **domain**.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+-   Also, Configure the **Mail** and **Database** parameters inside **.env** file.
+.
+```
+php artisan krayin-crm:install
+```
+
+**To execute Krayin**:
+
+##### On server:
+
+Warning: Before going into production mode we recommend you uninstall developer dependencies.
+In order to do that, run the command below:
+
+> composer install --no-dev
+
+```
+Open the specified entry point in your hosts file in your browser or make an entry in hosts file if not done.
+```
+
+##### On local:
+
+```
+php artisan route:clear
+php artisan serve
+```
+
+
+**How to log in as admin:**
+
+> _http(s)://example.com/admin/login_
+
+```
+email:admin@example.com
+password:admin123
+```
+
+### License
+
+Krayin CRM is a truly opensource CRM framework which will always be free under the [MIT License](https://github.com/krayin/laravel-crm/blob/master/LICENSE).
+
+### Security Vulnerabilities
+
+Please don't disclose security vulnerabilities publicly. If you find any security vulnerability in Krayin CRM then please email us: mailto:sales@krayincrm.com.

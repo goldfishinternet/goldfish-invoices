@@ -18,7 +18,7 @@ class Setting extends Model
 
     public $orderable = [
         'id',
-        'company_name',
+        'name',
         'city',
         'primary_contact',
         'currency_symbol',
@@ -26,8 +26,10 @@ class Setting extends Model
 
     public $filterable = [
         'id',
-        'invoice_number',
-        'date_issued',
+        'name',
+        'city',
+        'primary_contact',
+        'currency_symbol',
     ];
 
     protected $fillable = [
@@ -42,16 +44,15 @@ class Setting extends Model
         'primary_contact',
         'primary_contact_email',
         'logo',
-        'logo_pdf',
-        'invoice_note_default',
         'currency_type',
         'currency_symbol',
         'tax_code',
-        'tax_1_desc',
-        'tax_1_rate',
-        'tax_2_desc',
-        'tax_2_rate',
-        'days_payment_due',
+        'default_invoice_note',
+        'default_tax_1_desc',
+        'default_tax_1_rate',
+        'default_tax_2_desc',
+        'default_tax_2_rate',
+        'default_days_payment_due',
     ];
 
     protected $dates = [

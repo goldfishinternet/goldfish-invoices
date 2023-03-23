@@ -3,7 +3,7 @@
     <div class="form-group {{ $errors->has('role.title') ? 'invalid' : '' }}">
         <label class="form-label required" for="title">{{ trans('cruds.role.fields.title') }}</label>
         <input class="form-control" type="text" name="title" id="title" required wire:model.defer="role.title">
-        <div class="validation-message">
+        <div class="invalid-feedback">
             {{ $errors->first('role.title') }}
         </div>
         <div class="help-block">
@@ -13,7 +13,7 @@
     <div class="form-group {{ $errors->has('permissions') ? 'invalid' : '' }}">
         <label class="form-label required" for="permissions">{{ trans('cruds.role.fields.permissions') }}</label>
         <x-select-list class="form-control" required id="permissions" name="permissions" wire:model="permissions" :options="$this->listsForFields['permissions']" multiple />
-        <div class="validation-message">
+        <div class="invalid-feedback">
             {{ $errors->first('permissions') }}
         </div>
         <div class="help-block">

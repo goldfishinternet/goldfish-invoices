@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable implements HasLocalePreference, MustVerifyEmail
 {
@@ -106,6 +107,12 @@ class User extends Authenticatable implements HasLocalePreference, MustVerifyEma
     public function roles()
     {
         return $this->belongsToMany(Role::class);
+    }
+
+    public function hasRole($title)
+    {
+        $role = Role::where(DB::raw('lower(title)'), strtolower($title))->get()->first();
+        return ($role)? $this->roles()->get()->contains($role): false;
     }
 
     public function team()

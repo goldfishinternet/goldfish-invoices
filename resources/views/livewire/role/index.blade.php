@@ -20,11 +20,6 @@
                         {{ __('Delete Selected') }}
                     </button>
                 @endcan
-                @if(file_exists(app_path('Http/Livewire/ExcelExport.php')))
-                    <livewire:excel-export model="Role" format="csv" />
-                    <livewire:excel-export model="Role" format="xlsx" />
-                    <livewire:excel-export model="Role" format="pdf" />
-                @endif
             </div>
         </div>
     </div>
@@ -67,7 +62,7 @@
                             </td>
                             <td>
                                 @foreach($role->permissions as $key => $entry)
-                                    <span class="badge badge-relationship">{{ $entry->title }}</span>
+                                    <span class="badge bg-info">{{ $entry->title }}</span>
                                 @endforeach
                             </td>
                             <td>
@@ -118,10 +113,10 @@
 @push('scripts')
     <script>
         Livewire.on('confirm', e => {
-    if (!confirm("{{ trans('global.areYouSure') }}")) {
-        return
-    }
-@this[e.callback](...e.argv)
-})
+            if (!confirm("{{ trans('global.areYouSure') }}")) {
+                return;
+            }
+            @this[e.callback](...e.argv);
+        });
     </script>
 @endpush

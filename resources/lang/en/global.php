@@ -27,6 +27,8 @@ return [
     'month'                          => 'Month',
     'no'                             => 'No',
     'pleaseSelect'                   => 'Please select',
+    'pdf'                            => 'PDF',
+    'pdf_'                           => 'PDF File',
     'register'                       => 'Register',
     'remember_me'                    => 'Remember me',
     'reset_password'                 => 'Reset Password',

@@ -8,7 +8,7 @@
             </div>
             <div class="card-body">
                 @livewire('update-profile-information-form')
-                <hr class="mt-6 border-b-1 border-blueGray-300">
+                <hr>
                 @livewire('update-password-form')
             </div>
         </div>

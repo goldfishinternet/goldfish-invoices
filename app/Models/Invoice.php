@@ -92,6 +92,10 @@ class Invoice extends Model
         //return $amountsPaid->amount_paid;
         return number_format((float)$this->invoicePayments()->sum("amount_paid"), 2, '.', '');
     }
+    protected function getAmountOutstandingAttribute()
+    {
+        return number_format(abs($this->total_with_tax - $this->amount_paid), 2, '.', '');
+    }
     protected function getTotalNoTaxAttribute()
     {
         //$totalsNoTax = DB::table('invoice_items')->select(DB::raw('ROUND(SUM(invoice_items.amount * invoice_items.quantity),2) AS total_no_tax'))->where('invoice_id','=', $this->id)->get()->first();
@@ -133,6 +137,9 @@ class Invoice extends Model
     }
     protected function getPaymentStatusAttribute()
     {
+        if ($this->total_with_tax == 0) {
+            return "Draft";
+        }
         if ($this->amount_paid >= $this->total_with_tax) {
             return "Paid";
         }

@@ -7,10 +7,17 @@ use Livewire\Component;
 
 class Create extends Component
 {
+    public Setting $setting;
     public Client $client;
 
     public function mount(Client $client)
     {
+        $setting = Setting::get()->last();
+        $client->default_tax_1_desc = $setting->default_tax_1_desc;
+        $client->default_tax_1_rate = $setting->default_tax_1_rate;
+        $client->default_tax_2_desc = $setting->default_tax_2_desc;
+        $client->default_tax_2_rate = $setting->default_tax_2_rate;
+        $client->default_days_payment_due = $setting->default_days_payment_due;
         $this->client = $client;
     }
 
@@ -67,6 +74,10 @@ class Create extends Component
                 'string',
                 'nullable',
             ],
+            'client.tax_code' => [
+                'string',
+                'nullable',
+            ],
             'client.tax_status' => [
                 'string',
                 'nullable',
@@ -75,9 +86,25 @@ class Create extends Component
                 'string',
                 'nullable',
             ],
-            'client.tax_code' => [
+            'client.default_tax_1_desc' => [
                 'string',
                 'nullable',
+            ],
+            'client.default_tax_1_rate' => [
+                'decimal:2',
+                'nullable',
+            ],
+            'client.default_tax_2_desc' => [
+                'string',
+                'nullable',
+            ],
+            'client.default_tax_2_rate' => [
+                'decimal:2',
+                'nullable',
+            ],
+            'client.default_days_payment_due' => [
+                'integer',
+                'required',
             ],
         ];
     }

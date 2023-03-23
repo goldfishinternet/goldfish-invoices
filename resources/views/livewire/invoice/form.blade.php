@@ -8,7 +8,7 @@
                 <div class="mb-3 {{ $errors->has('invoice.invoice_number') ? 'invalid' : '' }}">
                     <label class="form-label" for="invoice_number">{{ trans('cruds.invoice.fields.invoice_number') }}</label>
                     <input class="form-control" type="text" name="invoice_number" id="invoice_number" wire:model.defer="invoice.invoice_number" readonly>
-                    <div class="validation-message">
+                    <div class="invalid-feedback">
                         {{ $errors->first('invoice.invoice_number') }}
                     </div>
                     <div class="help-block">
@@ -18,7 +18,7 @@
                 <div class="mb-3 {{ $errors->has('invoice.client_id') ? 'invalid' : '' }}">
                     <label class="form-label" for="client">{{ trans('cruds.invoice.fields.client') }}</label>
                     <x-select-list class="form-control" id="client_id" name="client_id" :options="$this->listsForFields['client']" wire:model="invoice.client_id" />
-                    <div class="validation-message">
+                    <div class="invalid-feedback">
                         {{ $errors->first('invoice.client_id') }}
                     </div>
                     <div class="help-block">
@@ -28,7 +28,7 @@
                 <div class="mb-3 {{ $errors->has('invoice.date_issued') ? 'invalid' : '' }}">
                     <label class="form-label" for="date_issued">{{ trans('cruds.invoice.fields.date_issued') }}</label>
                     <input class="form-control" wire:model.defer="invoice.date_issued" id="date_issued" name="date_issued" />
-                    <div class="validation-message">
+                    <div class="invalid-feedback">
                         {{ $errors->first('invoice.date_issued') }}
                     </div>
                     <div class="help-block">
@@ -39,7 +39,7 @@
                     <div class="col-4 {{ $errors->has('invoice.tax_1_rate') ? 'invalid' : '' }}">
                         <label class="form-label" for="tax_1_rate">{{ trans('cruds.invoice.fields.tax_1_rate') }}</label>
                         <input class="form-control" type="text" name="tax_1_rate" id="tax_1_rate" wire:model.defer="invoice.tax_1_rate">
-                        <div class="validation-message">
+                        <div class="invalid-feedback">
                             {{ $errors->first('invoice.tax_1_rate') }}
                         </div>
                         <div class="help-block">
@@ -49,7 +49,7 @@
                     <div class="col-8 {{ $errors->has('invoice.tax_1_desc') ? 'invalid' : '' }}">
                         <label class="form-label" for="tax_1_desc">{{ trans('cruds.invoice.fields.tax_1_desc') }}</label>
                         <input class="form-control" type="text" name="tax_1_desc" id="tax_1_desc" wire:model.defer="invoice.tax_1_desc">
-                        <div class="validation-message">
+                        <div class="invalid-feedback">
                             {{ $errors->first('invoice.tax_1_desc') }}
                         </div>
                         <div class="help-block">
@@ -61,7 +61,7 @@
                     <div class="col-4 {{ $errors->has('invoice.tax_2_rate') ? 'invalid' : '' }}">
                         <label class="form-label" for="tax_2_rate">{{ trans('cruds.invoice.fields.tax_2_rate') }}</label>
                         <input class="form-control" type="text" name="tax_2_rate" id="tax_2_rate" wire:model.defer="invoice.tax_2_rate">
-                        <div class="validation-message">
+                        <div class="invalid-feedback">
                             {{ $errors->first('invoice.tax_2_rate') }}
                         </div>
                         <div class="help-block">
@@ -71,7 +71,7 @@
                     <div class="col-8 {{ $errors->has('invoice.tax_2_desc') ? 'invalid' : '' }}">
                         <label class="form-label" for="tax_2_desc">{{ trans('cruds.invoice.fields.tax_2_desc') }}</label>
                         <input class="form-control" type="text" name="tax_2_desc" id="tax_2_desc" wire:model.defer="invoice.tax_2_desc">
-                        <div class="validation-message">
+                        <div class="invalid-feedback">
                             {{ $errors->first('invoice.tax_2_desc') }}
                         </div>
                         <div class="help-block">
@@ -83,7 +83,7 @@
                 <div class="mb-3 {{ $errors->has('invoice.days_payment_due') ? 'invalid' : '' }}">
                     <label class="form-label" for="days_payment_due">{{ trans('cruds.invoice.fields.days_payment_due') }}</label>
                     <input class="form-control" type="text" name="days_payment_due" id="days_payment_due" wire:model.defer="invoice.days_payment_due">
-                    <div class="validation-message">
+                    <div class="invalid-feedback">
                         {{ $errors->first('invoice.days_payment_due') }}
                     </div>
                     <div class="help-block">
@@ -93,7 +93,7 @@
                 <div class="mb-3 {{ $errors->has('invoice.payment_term') ? 'invalid' : '' }}">
                     <label class="form-label" for="payment_term">{{ trans('cruds.invoice.fields.payment_term') }}</label>
                     <input class="form-control" type="text" name="payment_term" id="payment_term" wire:model.defer="invoice.payment_term">
-                    <div class="validation-message">
+                    <div class="invalid-feedback">
                         {{ $errors->first('invoice.payment_term') }}
                     </div>
                     <div class="help-block">
@@ -103,7 +103,7 @@
                 <div class="mb-3 {{ $errors->has('invoice.invoice_note') ? 'invalid' : '' }}">
                     <label class="form-label" for="invoice_note">{{ trans('cruds.invoice.fields.invoice_note') }}</label>
                     <textarea class="form-control" type="text" name="invoice_note" id="invoice_note" wire:model.defer="invoice.invoice_note"></textarea>
-                    <div class="validation-message">
+                    <div class="invalid-feedback">
                         {{ $errors->first('invoice.invoice_note') }}
                     </div>
                     <div class="help-block">
