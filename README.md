@@ -52,54 +52,21 @@ Features currently include:
 
 ### Installation and Configuration
 
-##### Execute these commands below, in order
-
-```
-composer create-project krayin/laravel-crm
-```
-
--   Find **.env** file in root directory and change the **APP_URL** param to your **domain**.
-
--   Also, Configure the **Mail** and **Database** parameters inside **.env** file.
-.
-```
-php artisan krayin-crm:install
-```
-
-**To execute Krayin**:
-
-##### On server:
-
-Warning: Before going into production mode we recommend you uninstall developer dependencies.
-In order to do that, run the command below:
-
-> composer install --no-dev
-
-```
-Open the specified entry point in your hosts file in your browser or make an entry in hosts file if not done.
-```
-
-##### On local:
-
-```
-php artisan route:clear
-php artisan serve
-```
-
+I have used Laravel Sail docker setup for development so the .env.example settings can be used to run on your local docker development.
 
 **How to log in as admin:**
 
-> _http(s)://example.com/admin/login_
+> _http(s)://localhost/login_
 
 ```
-email:admin@example.com
-password:admin123
+email:andy@goldfishinternet.com
+password:password
 ```
 
 ### License
 
-Krayin CRM is a truly opensource CRM framework which will always be free under the [MIT License](https://github.com/krayin/laravel-crm/blob/master/LICENSE).
+
 
 ### Security Vulnerabilities
 
-Please don't disclose security vulnerabilities publicly. If you find any security vulnerability in Krayin CRM then please email us: mailto:sales@krayincrm.com.
+Please don't disclose security vulnerabilities publicly. If you find any security vulnerability please email me: mailto:andy@goldfishinternet.com.
