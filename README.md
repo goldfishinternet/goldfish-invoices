@@ -11,7 +11,7 @@ Version: 0.5b
 1. [Introduction](#introduction)
 2. [Requirements](#requirements)
 3. [Installation & Configuration](#installation-and-configuration)
-4. [Documentation](#documentation)
+4. [Setup and Usage](#setup-and-usage)
 5. [License](#license)
 6. [Security Vulnerabilities](#security-vulnerabilities)
 
