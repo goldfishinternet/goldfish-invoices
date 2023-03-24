@@ -11,7 +11,7 @@
 /_packages.txt
 /_sail-setup-notes.txt
 /_permissions.txt
-/database/migrations/removed/
+/_notes.txt
 /node_modules
 /public/hot
 /public/storage
@@ -19,4 +19,3 @@
 /vendor
 npm-debug.log
 yarn-error.log
-/_notes.txt
