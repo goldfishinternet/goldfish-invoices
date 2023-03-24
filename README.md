@@ -115,4 +115,4 @@ any files in the repository, I would appreciate credit, positive reviews and lin
 
 ### Security Vulnerabilities
 
-Please don't disclose security vulnerabilities publicly. If you find any security vulnerability please email me: mailto:andy@goldfishinternet.com.
+Please don't disclose security vulnerabilities publicly. If you find any security vulnerability please email me: [andy@goldfishinternet.com](mailto:andy@goldfishinternet.com).
