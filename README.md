@@ -17,7 +17,7 @@ Version: 0.5b
 
 ### Introduction
 
-[Goldfish Invoices](https://www.goldfishinternet.com) is a lightweight invoice web application built with [Laravel](https://laravel.com) with the very excellent [Quick Admin Panel](https://quickadminpanel.com/)
+[Goldfish Invoices](https://www.goldfishinternet.com) is a lightweight invoice web application built with [Laravel](https://laravel.com) and kick started with the very excellent [Quick Admin Panel](https://quickadminpanel.com/)
 crud generator. It utilises [LiveWire](https://laravel-livewire.com/) full stack framework and [Bootstrap](https://getbootstrap.com/docs/5.0/getting-started/introduction/) CSS framework. 
 
 *Demo Laravel Invoice prototype targeted at individuals, freelancers and SMEs.*
