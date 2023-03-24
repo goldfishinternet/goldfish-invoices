@@ -17,7 +17,13 @@
                 </div>
                 <div class="mb-3 {{ $errors->has('invoice.client_id') ? 'invalid' : '' }}">
                     <label class="form-label" for="client">{{ trans('cruds.invoice.fields.client') }}</label>
-                    <x-select-list class="form-control" id="client_id" name="client_id" :options="$this->listsForFields['client']" wire:model="invoice.client_id" />
+                    <select class="form-control" id="client_id" name="client_id" wire:model="invoice.client_id" wire:change="changeClient">
+                        <option>Please Select...</option>
+                        @foreach($this->listsForFields['client'] as $key => $value)
+                            <option value="{{ $key }}">{{ $value }}</option>
+                        @endforeach
+                    </select>
+
                     <div class="invalid-feedback">
                         {{ $errors->first('invoice.client_id') }}
                     </div>

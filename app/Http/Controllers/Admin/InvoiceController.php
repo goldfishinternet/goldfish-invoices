@@ -26,14 +26,7 @@ class InvoiceController extends Controller
         $invoice = Invoice::create([
             'client_id' => null,
             'invoice_number' => $invoice_number,
-            'date_issued' => date('Y-m-d'),
-            'tax_1_desc' => '',
-            'tax_1_rate' => '0.00',
-            'tax_2_desc' => '',
-            'tax_2_rate' => '0.00',
-            'days_payment_due' => '30',
-            'invoice_notes' => '',
-            'payment_instructions' => '',
+            'date_issued' => date('d/m/Y'),
         ]);
 
         return view('admin.invoice.edit', compact('invoice'));

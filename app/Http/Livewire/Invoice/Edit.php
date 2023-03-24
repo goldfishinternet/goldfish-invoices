@@ -9,7 +9,6 @@ use Livewire\Component;
 class Edit extends Component
 {
     public Invoice $invoice;
-
     public array $listsForFields = [];
 
     public function mount(Invoice $invoice)
@@ -32,6 +31,35 @@ class Edit extends Component
         return redirect()->route('admin.invoices.index');
     }
 
+    public function changeClient() {
+
+        $client = Client::find($this->invoice->client_id);
+        if(!$client) {
+            return;
+        }
+        if($this->invoice->tax_1_rate=='') {
+            $this->invoice->tax_1_rate = $client->default_tax_1_rate;
+        }
+        if($this->invoice->tax_1_desc=='') {
+            $this->invoice->tax_1_desc = $client->default_tax_1_desc;
+        }
+        if($this->invoice->tax_2_rate=='') {
+            $this->invoice->tax_2_rate = $client->default_tax_2_rate;
+        }
+        if($this->invoice->tax_2_desc=='') {
+            $this->invoice->tax_2_desc = $client->default_tax_2_desc;
+        }
+        if($this->invoice->days_payment_due=='') {
+            $this->invoice->days_payment_due = $client->default_days_payment_due;
+        }
+        if($this->invoice->payment_instructions=='') {
+            $this->invoice->payment_instructions = $client->default_payment_instructions;
+        }
+        if($this->invoice->invoice_notes=='') {
+            $this->invoice->invoice_notes = $client->default_invoice_notes;
+        }
+    }
+
     protected function rules(): array
     {
         return [
@@ -46,7 +74,7 @@ class Edit extends Component
             ],
             'invoice.date_issued' => [
                 'nullable',
-                'date_format:Y-m-d',// . config('project.date_format'),
+                'date_format:' . config('project.date_format'),
             ],
             'invoice.days_payment_due' => [
                 'integer',

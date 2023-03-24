@@ -46,7 +46,7 @@ class Create extends Component
             ],
             'invoice.date_issued' => [
                 'nullable',
-                'date_format:Y-m-d',// . config('project.date_format'),
+                'date_format:' . config('project.date_format'),
             ],
             'invoice.days_payment_due' => [
                 'integer',

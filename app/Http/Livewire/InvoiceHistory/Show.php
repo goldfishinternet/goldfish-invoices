@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\InvoiceHistory;
 
+use Carbon\Carbon;
 use Livewire\Component;
 use App\Models\Invoice;
 use App\Models\InvoiceHistory;
@@ -31,7 +32,7 @@ class Show extends Component
             'message' => 'required|string',
             'send' => 'nullable|boolean',
             'attach' => 'nullable|boolean',
-            'date_sent' => 'nullable|date_format:Y-m-d',
+            'date_sent' => 'nullable|date_format:d/m/Y',
         ];
     }
 
@@ -58,7 +59,7 @@ class Show extends Component
             $this->invoice_id = $invoiceHistory->invoice_id;
             $this->recipient = $invoiceHistory->recipient;
             $this->message = $invoiceHistory->message;
-            $this->date_sent = $invoiceHistory->date_sent;
+            $this->date_sent = date('d/m/Y', strtotime($invoiceHistory->date_sent));
             $this->send = $invoiceHistory->send;
             $this->attach = $invoiceHistory->attach;
         } else {
@@ -73,7 +74,7 @@ class Show extends Component
             'invoice_id' => $validatedData['invoice_id'],
             'recipient' => $validatedData['recipient'],
             'message' => $validatedData['message'],
-            'date_sent' => $validatedData['date_sent'],
+            'date_sent' => Carbon::createFromFormat('d/m/Y', $validatedData['date_sent'])->format('Y-m-d'),
             'send' => $validatedData['send'],
             'attach' => $validatedData['attach']
         ]);

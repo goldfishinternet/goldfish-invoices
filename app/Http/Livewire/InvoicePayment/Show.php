@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\InvoicePayment;
 
+use Carbon\Carbon;
 use Livewire\Component;
 use App\Models\Invoice;
 use App\Models\InvoicePayment;
@@ -25,7 +26,7 @@ class Show extends Component
     {
         return [
             'invoice_id' => 'required|numeric',
-            'date_paid' => 'required|date_format:Y-m-d',
+            'date_paid' => 'required|date_format:d/m/Y',
             'amount_paid' => 'required|numeric',
             'payment_note' => 'required|string',
         ];
@@ -52,7 +53,7 @@ class Show extends Component
         if($invoicePayment){
             $this->invoice_payment_id = $invoicePayment->id;
             $this->invoice_id = $invoicePayment->invoice_id;
-            $this->date_paid = $invoicePayment->date_paid;
+            $this->date_paid = date('d/m/Y', strtotime($invoicePayment->date_paid));
             $this->amount_paid = $invoicePayment->amount_paid;
             $this->payment_note = $invoicePayment->payment_note;
         } else {
@@ -65,7 +66,7 @@ class Show extends Component
         $validatedData = $this->validate();
         InvoicePayment::where('id',$this->invoice_payment_id)->update([
             'invoice_id' => $validatedData['invoice_id'],
-            'date_paid' => $validatedData['date_paid'],
+            'date_paid' => Carbon::createFromFormat('d/m/Y', $validatedData['date_paid'])->format('Y-m-d'),
             'amount_paid' => $validatedData['amount_paid'],
             'payment_note' => $validatedData['payment_note']
         ]);

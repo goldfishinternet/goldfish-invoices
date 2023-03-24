@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use \DateTimeInterface;
 use App\Support\HasAdvancedFilter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -44,9 +45,16 @@ class InvoiceHistory extends Model
         'deleted_at',
     ];
 
+    protected $casts = [
+        'date_sent' => 'date:d/m/Y'
+    ];
+
     public function invoice() : BelongsTo
     {
         return $this->belongsTo(Invoice::class);
+    }
+    public function setDateSentAttribute($value) {
+        $this->attributes['date_sent'] = Carbon::createFromFormat('d/m/Y', ($value))->format('Y-m-d');
     }
 
     protected function serializeDate(DateTimeInterface $date)

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use \DateTimeInterface;
 use App\Support\HasAdvancedFilter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -18,7 +19,7 @@ class Invoice extends Model
 
     protected $table = 'invoices';
 
-    protected $appends = array('amount_paid','days_overdue','total_no_tax','total_tax_1','total_tax_2','total_with_tax','payment_status');
+    protected $appends = array('amount_paid','amount_outstanding','days_overdue','total_no_tax','total_tax_1','total_tax_2','total_with_tax','payment_status');
 
     public $orderable = [
         'id',
@@ -53,7 +54,7 @@ class Invoice extends Model
     ];
 
     protected $casts = [
-        'date_issued' => 'date:Y-m-d'
+        'date_issued' => 'date:d/m/Y'
     ];
 
     protected $with = [
@@ -79,6 +80,9 @@ class Invoice extends Model
     public function invoicePayments() : HasMany
     {
         return $this->hasMany(InvoicePayment::class);
+    }
+    public function setDateIssuedAttribute($value) {
+        $this->attributes['date_issued'] = Carbon::createFromFormat('d/m/Y', ($value))->format('Y-m-d');
     }
 
     protected function serializeDate(DateTimeInterface $date)
