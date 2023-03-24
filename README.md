@@ -76,7 +76,7 @@ sail artisan migrate
 #or rebuild database and start over...  
 sail artisan migrate:fresh --seed
 
-#run unit/feature tests
+#run unit/feature tests  
 sail artisan test
 
 ### Setup and Usage
