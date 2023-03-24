@@ -3,6 +3,9 @@
 </p>
 
 <h1>Goldfish Invoices</h1>
+
+Version: 0.5b
+
 ## Topics
 
 1. [Introduction](#introduction)
@@ -22,8 +25,6 @@ crud generator. It utilises [LiveWire](https://laravel-livewire.com/) full stack
 Primarily intended to satisfy my own needs as a freelance web developer, I am also using it to gain further real work experience building Laravel and LiveWire web application solutions
 
 **This prototype is currently only partially complete but invoicing is functional enough for me to be using in production to create and generate PDF invoices**
-
-# Visit the [Demo](https://www.goldfishinternet.com)
 
 Features currently include:
 
@@ -54,18 +55,63 @@ Features currently include:
 
 I have used Laravel Sail docker setup for development so the .env.example settings can be used to run on your local docker development.
 
-**How to log in as admin:**
+Here is my build and develpment process...
 
-> _http(s)://localhost/login_
+#Modify .env (you can copy the .env.example which is set up for sail development)
+
+#Install PHP dependencies (you will need composer installed)  
+composer install
+
+#Install JS dependencies (you will need Node.js and NPM)  
+npm install
+
+#Build the SASS and Javascript with Vite
+npm run build
+
+#Add an alias for the "sail" command  
+alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'
+
+#Start sail..  
+sail up
+
+#Build database structure...  
+sail artisan migrate  
+
+#or rebuild database and start over...  
+sail artisan migrate:fresh --seed
+
+#run unit/feature tests
+sail artisan test
+
+### Setup and Usage
+
+**Log in as default admin account**  
+(please note port 81 which you can remove or adjust in .env with other sail ports)
+
+> _http://localhost:81/login_
 
 ```
 email:admin@example.com
 password:password
 ```
 
+- Adjust the default email and password using the hamburger menu, under "My Profile".
+- You can also modify the full account and add/modify other records in "Settings management"
+  and "Users".
+- Set up your business details, add logo (png/jpg) in "Settings management" and "Settings". These
+  are used on the invoices that get generated. Set your system default payment instructions, tax etc.
+- Add your client organisations and optionally add/assign individual client contacts to the client.  
+  Set your client default payment instructions, tax etc.
+- Create an invoice, add invoice line items, quantity and price. When you are happy you can preview 
+  and generate PDF version for emailing using your preferred email client software or service.
+- When you receive payments, you can add them to the invoice and once settled the invoice 
+  status will update to "Paid".
+- You can optionally add invoice notes to further track history.
+
 ### License
 
-
+[Goldfish Invoices](https://github.com/goldfishinternet/goldfish-invoices) is free to use and modify under the [MIT License](https://github.com/krayin/laravel-crm/blob/master/LICENSE). If you use or make use of 
+any files in the repository, I would appreciate credit, positive reviews and links to my website [www.goldfishinternet.com](https://www.goldfishinternet.com]).
 
 ### Security Vulnerabilities
 
