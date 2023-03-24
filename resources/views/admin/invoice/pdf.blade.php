@@ -103,8 +103,8 @@
             <td valign="top" width="30%">
                 <h3>{{ $setting->name }}</h3>
                 <p>
-                    @if($setting->address1 != '') {{ $setting->address1 }}, <br>@endif
-                    @if($setting->address2 != '') {{ $setting->address2 }}, <br>@endif
+                    @if($setting->address_1 != '') {{ $setting->address_1 }}, <br>@endif
+                    @if($setting->address_2 != '') {{ $setting->address_2 }}, <br>@endif
                     @if($setting->city != '') {{ $setting->city }}, <br />@endif
                     @if($setting->country != '') {{ $setting->country }}, <br>@endif
                     @if($setting->postcode != '') {{ $setting->postcode }} @endif
@@ -114,6 +114,7 @@
                     @if($setting->mobile != '') Mobile: {{ $setting->mobile }} <br>@endif
                     @if($setting->email != '') Email: {{ $setting->email }} <br>@endif
                     @if($setting->website != '') Web: {{ $setting->website }} <br>@endif
+                    @if($setting->tax_code != '') Tax Ref: {{ $setting->tax_code }} <br>@endif
                 </p>
             <td>
         <tr>
