@@ -106,8 +106,7 @@ password:password
 
 ### License
 
-[Goldfish Invoices](https://github.com/goldfishinternet/goldfish-invoices) is free to use and modify under the [MIT License](https://github.com/krayin/laravel-crm/blob/master/LICENSE). If you use or make use of 
-any files in the repository, I would appreciate credit, positive reviews and links to my website [www.goldfishinternet.com](https://www.goldfishinternet.com]).
+[Goldfish Invoices](https://github.com/goldfishinternet/goldfish-invoices) is free to use and modify under the [MIT License](https://github.com/krayin/laravel-crm/blob/master/LICENSE). If you use or make use of any files in the repository, I would appreciate credit, stars, positive reviews and links to my website [www.goldfishinternet.com](https://www.goldfishinternet.com]).
 
 ### Security Vulnerabilities
 
