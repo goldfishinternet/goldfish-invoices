@@ -22,7 +22,7 @@ crud generator. It utilises [LiveWire](https://laravel-livewire.com/) full stack
 
 *Demo Laravel Invoice prototype targeted at individuals, freelancers and SMEs.*
 
-Primarily intended to satisfy my own needs as a freelance web developer, I am also using it to gain further real work experience building Laravel and LiveWire web application solutions
+Primarily intended to satisfy my own needs as a freelance web developer, I am also using it to gain further real world experience building Laravel and LiveWire full stack web applications.
 
 **This prototype is currently only partially complete but invoicing is functional enough for me to be using in production to create and generate PDF invoices**
 
