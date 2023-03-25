@@ -90,6 +90,18 @@
             {{ trans('cruds.client.fields.email_helper') }}
         </div>
     </div>
+    <div class="mb-3">
+        <div class="form-check">
+            <input id="tax_status" type="checkbox" wire:model.defer="client.tax_status" class="form-check-input">
+            <label for="tax_status" class="form-check-label">Taxable?</label>
+        </div>
+        <div class="invalid-feedback">
+            {{ $errors->first('client.tax_status') }}
+        </div>
+        <div class="help-block">
+            {{ trans('cruds.client.fields.tax_status_helper') }}
+        </div>
+    </div>
 
     <div class="mb-3">
         <label class="form-label" for="default_tax_1_desc">{{ trans('cruds.client.fields.default_tax_1_desc') }}</label>

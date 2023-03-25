@@ -72,7 +72,7 @@ class Edit extends Component
                 'nullable',
             ],
             'client.tax_status' => [
-                'string',
+                'boolean',
                 'nullable',
             ],
             'client.client_notes' => [
