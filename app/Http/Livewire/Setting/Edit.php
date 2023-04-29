@@ -24,6 +24,18 @@ class Edit extends Component
         return view('livewire.setting.form');
     }
 
+    public function updatedLogo()
+    {
+        $this->validate([
+            'logo' => [
+                'image',
+                'max:1024',
+                'mimes:jpg,jpeg,png,svg,gif',
+                'nullable',
+            ],
+        ]);
+    }
+
     public function submit()
     {
         //dd($_FILES);
@@ -37,6 +49,11 @@ class Edit extends Component
         $this->setting->save();
 
         return redirect()->route('admin.settings.edit');
+    }
+
+    public function removeLogo() {
+        $this->setting->logo = null;
+        $this->setting->save();
     }
 
     protected function rules(): array
@@ -74,6 +91,14 @@ class Edit extends Component
                 'string',
                 'nullable',
             ],
+            'setting.phone' => [
+                'string',
+                'required',
+            ],
+            'setting.mobile' => [
+                'string',
+                'nullable',
+            ],
             'setting.primary_contact' => [
                 'string',
                 'required',
@@ -81,11 +106,6 @@ class Edit extends Component
             'setting.primary_contact_email' => [
                 'string',
                 'required',
-            ],
-            'setting.logo' => [
-                'image',
-                'max:1024',
-                'nullable',
             ],
             'setting.currency_type' => [
                 'string',

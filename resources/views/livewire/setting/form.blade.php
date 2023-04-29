@@ -1,4 +1,4 @@
-<form wire:submit.prevent="submit" class="pt-3">
+<form wire:submit.prevent="submit" class="pt-3" enctype="multipart/form-data">
 
     <div class="mb-3">
         <label class="form-label" for="name">{{ trans('cruds.setting.fields.name') }}</label>
@@ -81,6 +81,26 @@
         </div>
     </div>
     <div class="mb-3">
+        <label class="form-label" for="phone">{{ trans('cruds.setting.fields.phone') }}</label>
+        <input class="form-control {{ $errors->has('setting.phone') ? 'is-invalid' : '' }}" type="text" name="phone" id="phone" wire:model.defer="setting.phone">
+        <div class="invalid-feedback">
+            {{ $errors->first('setting.phone') }}
+        </div>
+        <div class="help-block">
+            {{ trans('cruds.setting.fields.phone_helper') }}
+        </div>
+    </div>
+    <div class="mb-3">
+        <label class="form-label" for="mobile">{{ trans('cruds.setting.fields.mobile') }}</label>
+        <input class="form-control {{ $errors->has('setting.mobile') ? 'is-invalid' : '' }}" type="text" name="mobile" id="mobile" wire:model.defer="setting.mobile">
+        <div class="invalid-feedback">
+            {{ $errors->first('setting.mobile') }}
+        </div>
+        <div class="help-block">
+            {{ trans('cruds.setting.fields.mobile_helper') }}
+        </div>
+    </div>
+    <div class="mb-3">
         <label class="form-label" for="primary_contact">{{ trans('cruds.setting.fields.primary_contact') }}</label>
         <input class="form-control {{ $errors->has('setting.primary_contact') ? 'is-invalid' : '' }}" type="text" name="primary_contact" id="primary_contact" wire:model.defer="setting.primary_contact">
         <div class="invalid-feedback">
@@ -108,10 +128,11 @@
                 <div class="bg-light p-3">
                     <img src="{{ asset('storage/'.$setting->logo) }}" width="320">
                 </div>
+                    <button class="btn btn-sm" wire:click="removeLogo"><i class="fas fa-trash-alt"></i></button>
                 @endif
             </div>
             <div class="col-6">
-                @if ($logo)
+                @if ($logo && !$errors->has('logo'))
                 <div class="bg-light p-3">
                     Photo Preview:
                     <img src="{{ $logo->temporaryUrl() }}" width="320">
@@ -119,7 +140,7 @@
                 @endif
             </div>
         </div>
-        <input class="form-control {{ $errors->has('logo') ? 'is-invalid' : '' }}" type="file" name="logo" id="logo" wire:model="logo">
+        <input class="form-control {{ $errors->has('logo') ? 'is-invalid' : '' }}" type="file" name="logo" id="logo" wire:model="logo" >
         <div class="invalid-feedback">
             {{ $errors->first('logo') }}
         </div>

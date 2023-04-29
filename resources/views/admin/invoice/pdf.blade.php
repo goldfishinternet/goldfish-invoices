@@ -112,7 +112,7 @@
                 <p>
                     @if($setting->phone != '') Telephone: {{ $setting->phone }} <br>@endif
                     @if($setting->mobile != '') Mobile: {{ $setting->mobile }} <br>@endif
-                    @if($setting->email != '') Email: {{ $setting->email }} <br>@endif
+                    @if($setting->primary_contact_email != '') Email: {{ $setting->primary_contact_email }} <br>@endif
                     @if($setting->website != '') Web: {{ $setting->website }} <br>@endif
                     @if($setting->tax_code != '') Tax Ref: {{ $setting->tax_code }} <br>@endif
                 </p>
@@ -160,13 +160,13 @@
                 <td colspan="4" align="right"><strong>{{ trans('cruds.invoice.labels.sub_total') }}</strong></td>
                 <td>{{ $setting->currency_symbol }}{{ $invoice->total_no_tax }}</td>
             </tr>
-            @if((float)$invoice->total_tax_1 > 0)
+            @if($invoice->client->tax_status = 1 || (float)$invoice->total_tax_1 > 0)
             <tr>
                 <td colspan="4" align="right">{{ ($invoice->tax_1_desc)? $invoice->tax_1_desc: trans('cruds.invoice.labels.tax_1_desc') }}</td>
                 <td>{{ $setting->currency_symbol }}{{ $invoice->total_tax_1 }}</td>
             </tr>
             @endif
-            @if((float)$invoice->total_tax_2 > 0)
+            @if($invoice->client->tax_status = 1 && (float)$invoice->total_tax_2 > 0)
             <tr>
                 <td colspan="4" align="right">{{ ($invoice->tax_2_desc)? $invoice->tax_2_desc: trans('cruds.invoice.labels.tax_2_desc') }}</td>
                 <td>{{ $setting->currency_symbol }}{{ $invoice->total_tax_2 }}</td>
@@ -199,12 +199,14 @@
         </tfoot>
     </table>
 
-    <p>{{ $invoice->invoice_notes }}</p>
+    @if($invoice->client->tax_status = 1 || (float)$invoice->total_tax_1 == 0)<p>Please Note: {{ ($invoice->tax_1_desc)? $invoice->tax_1_desc: trans('cruds.invoice.labels.tax_1_desc') }} is currently zero rated as I don't yet meet the threshold. @if($invoice->tax_1_desc=='GST')Please send your GST number to remain zero rated.@endif</p>@endif
+
+    @if($invoice->invoice_notes != '')<p>{!! nl2br(e($invoice->invoice_notes)) !!}</p>@endif
 
     <p><strong>{{ trans('cruds.invoice.labels.payment_terms') }}: {{ $invoice->days_payment_due }} days</strong><br/>
         {{ trans('cruds.invoice.labels.payment_prompt') }} {{ date('d/m/Y', strtotime($invoice->date_issued . ' + ' . $invoice->days_payment_due . ' days')) }}</p>
 
-    <p>{{ $invoice->payment_instructions }}</p>
+    @if($invoice->payment_instructions != '')<p>{!! nl2br(e($invoice->payment_instructions)) !!}</p>@endif
 
     <div id="footer">
         <p></p>

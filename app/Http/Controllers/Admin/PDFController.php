@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Invoice;
 use App\Models\Setting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use PDF;
 class PDFController extends Controller
 {
@@ -15,6 +16,6 @@ class PDFController extends Controller
 
       $pdf = PDF::loadView('admin.invoice.pdf', compact('invoice', 'setting'));
 
-      return $pdf->download('invoice.pdf');
+      return $pdf->download(Str::slug($setting->name, '-') . '-invoice-' . $invoice->invoice_number . '-' . Str::slug($invoice->client->name, '-') . '.pdf');
     }
 }

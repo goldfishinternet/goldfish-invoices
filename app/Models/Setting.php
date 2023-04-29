@@ -41,6 +41,8 @@ class Setting extends Model
         'country',
         'postcode',
         'website',
+        'phone',
+        'mobile',
         'primary_contact',
         'primary_contact_email',
         'logo',

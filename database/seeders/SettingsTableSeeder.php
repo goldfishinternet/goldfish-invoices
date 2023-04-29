@@ -26,6 +26,8 @@ class SettingsTableSeeder extends Seeder
                 'country'                       => 'Country',
                 'postcode'                      => 'Postcode',
                 'website'                       => 'www.domain.com',
+                'phone'                         => '+44 123 456 7890',
+                'mobile'                        => '+44 123 456 7890',
                 'primary_contact'               => 'Firstname Lastname',
                 'primary_contact_email'         => 'name@domain.com',
                 'logo'                          => '',
