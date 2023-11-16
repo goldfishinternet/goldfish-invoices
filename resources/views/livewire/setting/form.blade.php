@@ -251,7 +251,7 @@
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="mb-3">
         <button class="btn btn-primary mx-1" type="submit">
             {{ trans('global.save') }}
         </button>
