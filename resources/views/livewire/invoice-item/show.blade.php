@@ -40,12 +40,12 @@
             <tr>
                 <td colspan="3">Sub Total</td><td colspan="2">{{ $invoice->total_no_tax }}</td>
             </tr>
-            @if($invoice->client->tax_status = 1 || (float)$invoice->total_tax_1 > 0)
+            @if($invoice->client?->tax_status == 1 || (float)$invoice->total_tax_1 > 0)
             <tr>
                 <td colspan="3">{{ $invoice->tax_1_desc }}</td><td colspan="2">{{ $invoice->total_tax_1 }}</td>
             </tr>
             @endif
-            @if($invoice->client->tax_status = 1 && (float)$invoice->total_tax_2 > 0)
+            @if($invoice->client?->tax_status == 1 && (float)$invoice->total_tax_2 > 0)
             <tr>
                 <td colspan="3">{{ $invoice->tax_2_desc }}</td><td colspan="2">{{ $invoice->total_tax_2 }}</td>
             </tr>
