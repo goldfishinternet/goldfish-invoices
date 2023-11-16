@@ -8,6 +8,7 @@ use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use PDF;
+
 class PDFController extends Controller
 {
     public function invoice($id){
