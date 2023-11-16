@@ -91,6 +91,16 @@
         </div>
     </div>
     <div class="mb-3">
+        <label class="form-label" for="email">{{ trans('cruds.client.fields.tax_code') }}</label>
+        <input class="form-control {{ $errors->has('client.tax_code') ? 'is-invalid' : '' }}" type="text" name="tax_code" id="tax_code" wire:model.defer="client.tax_code">
+        <div class="invalid-feedback">
+            {{ $errors->first('client.tax_code') }}
+        </div>
+        <div class="help-block">
+            {{ trans('cruds.client.fields.tax_code_helper') }}
+        </div>
+    </div>
+    <div class="mb-3">
         <div class="form-check">
             <input id="tax_status" type="checkbox" wire:model.defer="client.tax_status" class="form-check-input">
             <label for="tax_status" class="form-check-label">Taxable?</label>
@@ -105,7 +115,7 @@
 
     <div class="mb-3">
         <label class="form-label" for="default_tax_1_desc">{{ trans('cruds.client.fields.default_tax_1_desc') }}</label>
-        <input class="form-control {{ $errors->has('client.default_tax_1_desc') ? 'is-is-invalid' : '' }}" type="text" name="default_tax_1_desc" id="default_tax_1_desc" wire:model.defer="client.default_tax_1_desc">
+        <input class="form-control {{ $errors->has('client.default_tax_1_desc') ? 'is-invalid' : '' }}" type="text" name="default_tax_1_desc" id="default_tax_1_desc" wire:model.defer="client.default_tax_1_desc">
         <div class="invalid-feedback">
             {{ $errors->first('client.default_tax_1_desc') }}
         </div>
@@ -174,7 +184,7 @@
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="mb-3">
         <button class="btn btn-primary mx-1" type="submit">
             {{ trans('global.save') }}
         </button>
