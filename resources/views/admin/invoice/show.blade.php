@@ -84,7 +84,7 @@
         @foreach($invoice->invoiceItems as $key => $invoiceItem)
         <tbody>
         <tr valign="top">
-            <td>{{ nl2br(str_replace(array('\n', '\r'), "\n", $invoiceItem->work_description)) }}</td>
+            <td>{{ str_replace(array('\n', '\r'), "\n", $invoiceItem->work_description) }}</td>
             <td>{{ $invoiceItem->quantity }}</td>
             <td>{{ $setting->currency_symbol }}{{ $invoiceItem->amount }}</td>
             <td>{{ ($invoiceItem->taxable)? 'Yes': 'No' }}</td>
@@ -97,13 +97,13 @@
                 <th colspan="4" class="text-end">{{ trans('cruds.invoice.labels.sub_total') }}</th>
                 <th>{{ $setting->currency_symbol }}{{ $invoice->total_no_tax }}</th>
             </tr>
-            @if($invoice->client->tax_status = 1 || (float)$invoice->total_tax_1 > 0)
+            @if($invoice->client?->tax_status == 1 || (float)$invoice->total_tax_1 > 0)
             <tr>
                 <td colspan="4" class="text-end">{{ ($invoice->tax_1_desc)? $invoice->tax_1_desc: trans('cruds.invoice.labels.tax_1_desc') }}</td>
                 <td>{{ $setting->currency_symbol }}{{ $invoice->total_tax_1 }}</td>
             </tr>
             @endif
-            @if($invoice->client->tax_status = 1 && (float)$invoice->total_tax_2 > 0)
+            @if($invoice->client?->tax_status == 1 && (float)$invoice->total_tax_2 > 0)
             <tr>
                 <td colspan="4" class="text-end">{{ ($invoice->tax_2_desc)? $invoice->tax_2_desc: trans('cruds.invoice.labels.tax_2_desc') }}</td>
                 <td>{{ $setting->currency_symbol }}{{ $invoice->total_tax_2 }}</td>
@@ -137,7 +137,7 @@
 
         <div class="row mb-3">
             <div class="col-12">
-                @if($invoice->client->tax_status = 1 || (float)$invoice->total_tax_1 == 0)<p>Please Note: {{ ($invoice->tax_1_desc)? $invoice->tax_1_desc: trans('cruds.invoice.labels.tax_1_desc') }} is currently zero rated as I don't yet meet the threshold. @if($invoice->tax_1_desc=='GST')Please send your GST number to remain zero rated.@endif</p>@endif
+                @if($invoice->client?->tax_status == 1 || (float)$invoice->total_tax_1 == 0)<p>Please Note: {{ ($invoice->tax_1_desc)? $invoice->tax_1_desc: trans('cruds.invoice.labels.tax_1_desc') }} is currently zero rated as I don't yet meet the threshold. @if($invoice->tax_1_desc=='GST' && $invoice->client?->tax_code == '')Please send your GST number to remain zero rated.@endif</p>@endif
 
                 @if($invoice->invoice_notes != '')<p>{!! nl2br(e($invoice->invoice_notes)) !!}</p>@endif
 
