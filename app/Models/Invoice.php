@@ -30,6 +30,7 @@ class Invoice extends Model
     public $filterable = [
         'id',
         'invoice_number',
+        'client.name',
         'date_issued',
     ];
 
