@@ -8,6 +8,7 @@ use App\Models\Invoice;
 use App\Models\InvoiceItem;
 use App\Models\InvoicePayment;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class SampleDataSeeder extends Seeder
@@ -53,7 +54,7 @@ class SampleDataSeeder extends Seeder
         $invoice = Invoice::create([
             'client_id' => $client->id,
             'invoice_number' => 100005,
-            'date_issued' => now(),
+            'date_issued' => Carbon::now()->format('d/m/Y'),
             'days_payment_due' => 30,
             'tax_1_desc' => 'VAT',
             'tax_1_rate' => 20.00,
@@ -88,21 +89,21 @@ class SampleDataSeeder extends Seeder
 
         InvoicePayment::create([
             'invoice_id' => $invoice->id,
-            'date_paid' => now(),
+            'date_paid' => Carbon::now()->format('d/m/Y'),
             'amount_paid' => 50.00,
             'payment_note' => '50 Payment',
         ]);
 
         InvoicePayment::create([
             'invoice_id' => $invoice->id,
-            'date_paid' => now(),
+            'date_paid' => Carbon::now()->format('d/m/Y'),
             'amount_paid' => 50.00,
             'payment_note' => '50 Payment',
         ]);
 
         InvoicePayment::create([
             'invoice_id' => $invoice->id,
-            'date_paid' => now(),
+            'date_paid' => Carbon::now()->format('d/m/Y'),
             'amount_paid' => 20.00,
             'payment_note' => '20 Payment',
         ]);
