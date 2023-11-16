@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Invoice;
 
 use App\Models\Invoice;
 use App\Models\Client;
+use App\Models\Place;
 use Livewire\Component;
 
 class Edit extends Component
@@ -109,6 +110,8 @@ class Edit extends Component
 
     protected function initListsForFields(): void
     {
-        $this->listsForFields['client'] = Client::pluck('name', 'id')->toArray();
+        //$this->listsForFields['client'] = Client::pluck('name', 'id')->toArray();
+        $clients = Client::orderBy('name','asc')->get(['id','name']);
+        $this->listsForFields['client'] = $clients;
     }
 }
